@@ -1,0 +1,525 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"comments",
+				"comments_template"
+			],
+			[
+				"password",
+				"password_confirmation"
+			],
+			[
+				"des",
+				"describe"
+			],
+			[
+				"user",
+				"user_with_same_email"
+			],
+			[
+				"me",
+				"Meteor"
+			],
+			[
+				"retu",
+				"returnElerate"
+			],
+			[
+				"er",
+				"erCostPer"
+			],
+			[
+				"cost",
+				"costPercent"
+			],
+			[
+				"cos",
+				"costPos"
+			],
+			[
+				"score",
+				"scorePos"
+			],
+			[
+				"observabl",
+				"observableArray"
+			],
+			[
+				"friend",
+				"friend_model"
+			],
+			[
+				"c",
+				"collections"
+			],
+			[
+				"the",
+				"the_title"
+			],
+			[
+				"un",
+				"underline"
+			],
+			[
+				"the_post_",
+				"the_post_thumbnail"
+			],
+			[
+				"the_th",
+				"the_post_thumbnail"
+			],
+			[
+				"wp_rese",
+				"wp_reset_query"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/LESS-build/LESS.sublime-build",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"gist",
+				"Gist: Create Public Gist"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: <?php … ?>"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"snippet ",
+				"Snippet: html"
+			]
+		],
+		"width": 567.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-franchise.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-contact.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-birthday.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-kids.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/footer.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/loop-menu.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/header.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/nav-menu-sections.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/loop-menu-section.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-menu-section.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-recipe-detail.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/_source/queries.txt",
+		"/Applications/XAMPP/xamppfiles/htdocs/wptest/assets/queries.txt",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/velvetFoundation.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/velvet-www/themes/Velvet/js/jquery.placeholder.js",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-home.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/spec/models/user_spec.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/db/migrate/20120509012317_add_password_digest_to_users.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/db/migrate/20120508053501_add_index_to_users_email.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/spec/controllers/pages_controller_spec.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/app/models/user.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/app/controllers/pages_controller.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/app/controllers/users_controller.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/Gemfile",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/donate_form.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/sample_app/db/migrate/20120508045323_create_users.rb",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/Theme - Default/Widget.sublime-settings",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/index 2.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/loop-map.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/ital.css",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-promotions.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/loop-culture.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category-culture.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-story.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-menu.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/single.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category-recipes.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-locations.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category-all-news.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category-best-of-the-year.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category-last-month.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category-last-week.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/archive.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/_upload/page-our-food.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/loop-gallery.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-gallery.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/promotions.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/category-promotions.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/loop-promotions.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/script.js",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/content-page-full.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/index.html",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/style.css",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/header 2.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-full.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-our-family.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/page-our-food.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/app/models/line_item.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/app/models/cart.rb",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/content-page.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/sidebar.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/simplepie/inc/simplepie.inc",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/simplepie/index.html",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/wp-config.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/base.css",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/content.css",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/functions.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/nav-post.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/nav-posts.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/posts-default.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/nav-social-footer.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/nav-social-footer 3.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/nav-social-footer 2.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/twodee/index.htm",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/canvas/index.htm",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/canvas/_template.htm",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/crafty/index.htm",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/rarf/index.htm",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/content.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/app/assets/stylesheets/application.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/_source_awd4_rails32/depot_e/app/assets/stylesheets/application.css.scss",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/margin-right.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/margin-bottom.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/margin-top.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/margin-left.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/erbe.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/erb.sublime-snippet",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/config/routes.rb",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/index 3.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/eleratemtr/eleratemtr.js",
+		"/Users/ryan/leaderboard/leaderboard.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/todos/client/todos.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/products/products.js",
+		"/Users/ryan/leaderboard/leaderboard.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/eleratemtr/eleratemtr.html",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/style.min.css",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/bootstrap.min.css",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/bootstrap.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/eleratemtr/public/styles.css",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/handlebars.sublime-snippet",
+		"/Users/ryan/leaderboard/leaderboard.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/app/assets/stylesheets/products.css.scss",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/db/seeds.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/_source_awd4_rails32/depot_a/db/seeds.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/app/views/products/_form.html.erb",
+		"/Applications/XAMPP/xamppfiles/htdocs/ror/awd4_depot/db/migrate/20120607205514_create_products.rb",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/elerate/index.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/discount-program.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/lrxd.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/gravity-forms.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/filters.php",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/actions.php",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/sublime-github/GitHub.sublime-settings",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/Gist/Gist.sublime-settings",
+		"/private/var/folders/38/7vh2w9f95rj9w6mhvr5142h40000gq/T/fz3temp-1/HomePage.ascx",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/phpeq.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/php.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/snippets/php.sublime-snippet",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/snippets/php.xml",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/snippets/php-snippets.sl2",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/Alignment/Base File.sublime-settings",
+		"/Users/ryan/Library/Application Support/Sublime Text 2/Packages/User/snippets/php",
+		"/Applications/XAMPP/xamppfiles/htdocs/_testwww/elerate/indexko.php"
+	],
+	"find":
+	{
+		"height": 114.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Applications/XAMPP/xamppfiles/htdocs/italiannis/wp-content/plugins/simplemap",
+			"",
+			"/Applications/XAMPP/xamppfiles/htdocs/italiannis/wp-content/plugins/store-locator-LRXD-extrafields",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"=&",
+			"pagination",
+			".rotate(180)\n          .scale(.5)\n          .duration('2s')",
+			"branding",
+			"cat-link",
+			"cat-links",
+			"add_theme_support",
+			"add_image_size",
+			"good",
+			"0088cc",
+			"recipe-detail",
+			"phone",
+			"Phone",
+			"phones",
+			"contact",
+			"span10",
+			"class=\"container-fluid\"",
+			"350px",
+			"Onion Rings",
+			"ul",
+			"php",
+			"simplemap",
+			"Get Directions",
+			"<hr />",
+			"Get Directions",
+			"location_search_city",
+			"class=\"result\"",
+			"id=\"results\"",
+			";}",
+			"load_simplemap",
+			"Select a distance:",
+			"#uploader",
+			">",
+			"lawrysold.stage.xylemdigital.com",
+			"class=sl_footer",
+			"sl_footer",
+			"address_search",
+			"address-search",
+			"shortcode",
+			"<pre>",
+			"--Search By City--",
+			"pre",
+			"<pre>",
+			"pre",
+			"Store Locator Plus",
+			"sl_fact_title",
+			";}	",
+			"')): ?>",
+			"featured",
+			"execute_and_output_template",
+			",{",
+			")",
+			"		<",
+			"'); ?>/",
+			"bottom",
+			"0px",
+			"height",
+			"error",
+			"{}",
+			"220px",
+			"\n				<li><img src=\"assets/main/img/flags/philippines.jpg\" /></li>\n				<li><img src=\"assets/main/img/flags/mexico.jpg\" /></li>",
+			"<li><img src=\"assets/main/img/flags/guatemala.jpg\" /></li>\n				<li><img src=\"assets/main/img/flags/philippines.jpg\" /></li>\n				<li><img src=\"assets/main/img/flags/mexico.jpg\" /></li>"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"=",
+			"009900",
+			"0094FF",
+			"option",
+			"Option",
+			"options",
+			"elerate",
+			"",
+			"shop.lawrysonline.com",
+			"Store Locator Plus LRXD Extra Fields",
+			"sl_facttitle"
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"output.tests":
+	{
+		"height": 112.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"layout",
+				"app/views/layouts/application.html.erb"
+			],
+			[
+				"pages",
+				"spec/controllers/pages_controller_spec.rb"
+			],
+			[
+				"con",
+				"app/controllers/pages_controller.rb"
+			],
+			[
+				"user",
+				"app/models/user.rb"
+			],
+			[
+				"user_s",
+				"spec/models/user_spec.rb"
+			],
+			[
+				"migrati",
+				"db/migrate/20120509012317_add_password_digest_to_users.rb"
+			],
+			[
+				"gemfile",
+				"Gemfile"
+			],
+			[
+				"db/migrate",
+				"db/migrate/20120508053501_add_index_to_users_email.rb"
+			],
+			[
+				"_create_",
+				"sample_app/db/migrate/20120508045323_create_users.rb"
+			],
+			[
+				"users",
+				"sample_app/app/controllers/users_controller.rb"
+			],
+			[
+				"models/user",
+				"sample_app/app/models/user.rb"
+			],
+			[
+				"spec/",
+				"spec/models/user_spec.rb"
+			],
+			[
+				"install",
+				"wp-admin/install.php"
+			],
+			[
+				"",
+				"wp-content/themes/italiannis/loop/loop-seasonal.php"
+			],
+			[
+				"functio",
+				"wp-includes/functions.php"
+			],
+			[
+				"header-def",
+				"wp-content/themes/italiannis/header/header-default.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Applications/XAMPP/xamppfiles/htdocs/_testwww/clsc/clsc.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 201.0,
+	"status_bar_visible": true
+}
