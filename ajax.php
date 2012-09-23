@@ -27,6 +27,12 @@ if($_POST){
 }
 
 if($_GET){
+	if($_GET['fn']=='card-load'){
+		$plotid = $_GET['plot'];
+		$sql = "SELECT cards.*,colors.value as color FROM cards LEFT JOIN colors on cards.color_id=colors.id WHERE plot_id=$plotid ORDER BY col,row ASC";
+		$cards = $dbh->query($sql)->fetchAll();
+		echo json_encode($cards);
+	}
 	if($_GET['fn']=='card-add'){
 		$plotid = $_GET['plot'];
 		$col = $_GET['col'];
@@ -45,7 +51,8 @@ if($_GET){
 	if($_GET['fn']=='card-save'){
 		$id = $_GET['id'];
 		$content = $_GET['content'];
-		$sql = "UPDATE cards SET content='$content' WHERE id=$id";
+		$color = $_GET['color'];
+		$sql = "UPDATE cards SET content='$content',color_id=$color WHERE id=$id";
 		$dbh->query($sql);
 		echo $content;
 	}

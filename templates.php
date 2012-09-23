@@ -13,19 +13,17 @@
 	</div>
 	<div id="_card">
 		<div class="card">
-			<div class="card-content-view cf ui-widget ui-widget-content ui-helper-clearfix ui-corner-all">
+			<div class="card-content-view cf rounded">
 				<div class="card-content">edit me</div>
 				<i class="icon-trash fl card-delete"></i>
 				<i class="icon-pencil icon-blue fr card-edit"></i>
 			</div>
-			<div class="card-content-edit cf ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="display: none;">
+			<div class="card-content-edit cf rounded" style="display: none;">
 				<textarea></textarea>
 				<div class="colors cf">
-					Color:<br />
-					<div class="colorclick LightSkyBlue">&nbsp;</div>
-					<div class="colorclick Pink">&nbsp;</div>
-					<div class="colorclick LightGreen">&nbsp;</div>
-					<div class="colorclick LightCoral">&nbsp;</div>
+					<?php foreach($colors as $color){	?>
+						<div class="colorclick <?=$color['name']?>" data-color-value="<?=$color['value']?>" data-color-id="<?=$color['id']?>">&nbsp;</div>
+					<?php } ?>
 				</div>
 				<i class="icon-trash fl card-delete"></i>
 				<i class="icon-remove icon-red fr card-close"></i>

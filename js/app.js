@@ -60,7 +60,35 @@ $(function(){
 		
 	});
 
-/* CARD FN */	
+/* CARD FN */
+	// card load
+	//$('#msg').load('ajax.php?fn=card-load&plot=1');
+	$.getJSON('ajax.php?fn=card-load&plot=1',function(result){
+		$.each(result, function(){
+			var colcnt = $('#columns > .column').length - 1;
+			console.log('colcnt: '+colcnt);
+			if(this.col > colcnt){
+				//create column
+				console.log('column-add');
+				$('#column-ctrl').before($('#_column').html());
+				$( ".column-content" ).sortable({connectWith: ".column-content"});
+				$('#column-ctrl').prev().attr('data-col',colcnt+1);
+				if(colcnt+1 > 1){
+					$('.column-delete').show();
+				}
+			}
+			// column with the corrrect data-col id add cards
+			var datacol = '.column[data-col='+this.col+']';
+			$(datacol).children('.column-content').append($('#_card').html());
+			var thiscard = $(datacol).children('.column-content').children('.card:last');
+			thiscard.attr('data-id',this.id);
+			thiscard.find('.card-content').html(this.content);
+			thiscard.attr('data-color-value',this.color);
+			thiscard.children('.card-content-view').css('background-color','#'+this.color);
+			thiscard.children('.card-content-edit').css('background-color','#'+this.color);
+		});
+	});
+
 	// card add
 	$(document).on('click','.card-add-btn',function(){
 		var me = $(this);
@@ -95,12 +123,13 @@ $(function(){
 		console.log('card-save');
 		var cardid = $(this).closest('.card').attr('data-id');
 		var cardcontent = $(this).siblings('textarea').val();
+		var cardcolor = $(this).closest('.card').attr('data-color-id');
 		$(this).parent().siblings('.card-content-view').children('.card-content').html(cardcontent);
-		$('#msg').load('ajax.php?fn=card-save&id='+cardid+'&content='+escape(cardcontent));
+		$('#msg').load('ajax.php?fn=card-save&id='+cardid+'&content='+escape(cardcontent)+'&color='+cardcolor);
 		console.log('card-close-after-save');
 		$(this).parent().hide();
 		$(this).parent().siblings('.card-content-view').show();
-		// hide edit icon while in edit mode
+		$(this).parent().siblings('.card-content-view').css('background-color','#'+$(this).closest('.card').attr('data-color-value'));
 	});
 
 	// card close
@@ -121,6 +150,16 @@ $(function(){
 			} 
 		});
 		
+	});
+
+	// color click
+	$(document).on('click','.colorclick',function(){
+		var me = $(this);
+		var thiscolor = me.attr('data-color-value');
+		var thiscolorid = me.attr('data-color-id');
+		$(this).closest('.card').attr('data-color-value',thiscolor);
+		$(this).closest('.card').attr('data-color-id',thiscolorid);
+		$(this).closest('.card-content-edit').css('background-color','#'+$(this).closest('.card').attr('data-color-value'));
 	});
 });
 

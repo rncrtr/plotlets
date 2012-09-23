@@ -2,8 +2,6 @@
 require_once('db.php');
 $plotid = 1;
 $cardid1 = 1;
-$sql = "SELECT * FROM cards WHERE plot_id=$plotid";
-$dbh->query($sql);
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,6 +38,7 @@ $dbh->query($sql);
 		.column-title{margin-left: 10px; font-size: 12px; font-style: italic; min-height: 35px; font-weight: 600;}
 		.anchor-title{margin-left: 10px; font-size: 12px; font-style: italic; min-height: 35px; font-weight: 600;}
 		.card{margin: 0px 10px 10px 10px;}
+		.rounded{-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; border: 1px solid #d8d8d8;}
 		.card-content-view {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; min-height: 35px;}
 
 		.card-content-edit {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; line-spacing: 1em;}
@@ -67,7 +66,7 @@ $dbh->query($sql);
 
 		/* add/edit */
 		.colors{padding-bottom: 10px;}
-		.colorclick{float: left; font-size: 11px; width: 15px; border: 1px solid #000; text-align: center; margin-right: 5px; cursor: pointer;}
+		.colorclick{float: left; font-size: 11px; height: 12px; width: 12px; border: 1px solid #000; text-align: center; margin-right: 3px; cursor: pointer;}
 		.columnclick{float: left; font-size: 11px; width: 10px; border: 0px solid #696969; text-align: center; margin-right: 5px; cursor: pointer;}
 	</style>
 	<?php include('colors.php'); ?>
