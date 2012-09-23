@@ -56,6 +56,12 @@ if($_GET){
 		$dbh->query($sql);
 		echo $content;
 	}
+	if($_GET['fn']=='card-delete'){
+		$id = $_GET['id'];
+		$sql = "DELETE FROM cards WHERE id=$id";
+		$dbh->query($sql);
+	}
+
 	if($_GET['fn']=='card-close'){
 		$id = $_GET['id'];
 		$sql = "SELECT * FROM cards WHERE id=$id";

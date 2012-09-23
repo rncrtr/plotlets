@@ -84,6 +84,7 @@ $(function(){
 			thiscard.attr('data-id',this.id);
 			thiscard.find('.card-content').html(this.content);
 			thiscard.attr('data-color-value',this.color);
+			thiscard.attr('data-color-id',this.color_id);
 			thiscard.children('.card-content-view').css('background-color','#'+this.color);
 			thiscard.children('.card-content-edit').css('background-color','#'+this.color);
 		});
@@ -147,6 +148,8 @@ $(function(){
 		smoke.confirm('Delete this card? Are you sure?',function(e){
 			if (e){
 				me.parent().parent().remove();
+				var cardid = me.closest('.card').attr('data-id');
+				$.get('ajax.php?fn=card-delete&id='+cardid);
 			} 
 		});
 		
