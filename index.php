@@ -1,102 +1,110 @@
-<!--
-TODO: 
-	- Add/Remove columns
-	- Add/Edit/Remove notes
-	- change color of notes
-	- change number of columns
-	- Save column and notes positions in the database (iterate with jQ to save serialized?)
-	- make accounts to login
-	- make discreet projects for each screen
--->
-<meta charset="utf-8">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" /></script>	
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" ></script>	
+<?php 
+require_once('db.php');
+$plotid = 1;
+$cardid1 = 1;
+$sql = "SELECT * FROM cards WHERE plot_id=$plotid";
+$dbh->query($sql);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>plotlets</title>
+	<meta charset="utf-8">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.8.21.custom.css">
-	
+	<link rel="stylesheet" href="js/smoke/smoke.css">
+	<link rel="stylesheet" href="js/smoke/themes/100s.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" /></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" ></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.editinplace.js"></script>
+	<script type="text/javascript" src="js/smoke/smoke.js"></script>
 	<style>
-	body{font-size: 12px;}
-	.column { width: 170px; float: left; padding-bottom: 100px; }
-	.portlet { margin: 0 1em 1em 0; }
-	.portlet-header { margin: 0.3em; padding-bottom: 4px; padding-left: 0.2em; }
-	.portlet-header .ui-icon { float: right; }
-	.portlet-content { padding: 0.4em; }
-	.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
-	.ui-sortable-placeholder * { visibility: hidden; }
+		*{font-family: helvetica, arial, sans-serif;}
+		body{font-size: 12px; min-width: 100%; width: 1000%; background: #FFF; margin: 10px;}
+		.left{text-align: left;}
+		.center{text-align: center;}
+		.right{text-align: right;}
+		.hidden{display: none;}
+		.fl{float: left;}
+		.fr{float: right;}
+
+		.meta{padding-bottom: 10px; padding-left: 10px;}
+		.meta .title{font-size: 16px; width: 450px; border: 0px; border-bottom: 1px solid #00137F; margin-top: 10px; padding: 5px 10px 5px 0px; }
+		
+		.column {font-family: helvetica, arial, sans-serif; width: 200px; float: left; min-height: 600px; border-right: 1px solid #e0e0e0;}
+		.column:last-child{border-right: 0px;}
+		.column-content{min-height: 50px;}
+		.column-ctrl{margin: 10px; min-height: 35px;}
+		.column-title{margin-left: 10px; font-size: 12px; font-style: italic; min-height: 35px; font-weight: 600;}
+		.anchor-title{margin-left: 10px; font-size: 12px; font-style: italic; min-height: 35px; font-weight: 600;}
+		.card{margin: 0px 10px 10px 10px;}
+		.card-content-view {margin: 10px; padding: 5px; min-height: 35px;}
+
+		.card-content-edit {padding: 0.4em; line-spacing: 1em;}
+		.card-content-edit textarea{width: 160px; height: 60px;}
+		.ctrl,.ctrl-edit{ margin: 5px 5px 5px 5px;}
+		.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
+		.ui-sortable-placeholder * { visibility: hidden; }
+
+		/*
+		.neon-green{background: #33FF33; color: #000;}
+		.light-blue{background: #33A1DE; color: #000;}
+		.blue{background: #0000FF; color: #FFF;}
+		.red{background: #E3170D; color: #FFF;}
+		.yellow{background: #E6B426; color: #000;}
+		*/
+		.title input.inplace_field{width: 300px;}
+		.column-title input.inplace_field{width: 160px;}
+		textarea.inplace_field{width: 160px; height: 60px;}
+
+
+		/* edit form */
+		.card-content-edit{}
+		.card-content-edit textarea{width: 160px; height: 60px;}
+		.card-content-edit .title{float: left; font-size: 12px; font-weight: bold;}
+		.card-add,.card-save,.card-close,.card-delete{cursor: pointer;}
+
+		/* add/edit */
+		.colors{padding-bottom: 10px;}
+		.colorclick{float: left; font-size: 11px; width: 15px; border: 1px solid #000; text-align: center; margin-right: 5px; cursor: pointer;}
+		.columnclick{float: left; font-size: 11px; width: 10px; border: 0px solid #696969; text-align: center; margin-right: 5px; cursor: pointer;}
 	</style>
-	<script>
-	$(function() {
-		$( ".column" ).sortable({
-			connectWith: ".column"
-		});
-
-		$( ".portlet" ).addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
-			.find( ".portlet-header" )
-				.addClass( "ui-widget-header ui-corner-all" )
-				.prepend( "<span class='ui-icon ui-icon-minusthick'></span>")
-				.end()
-			.find( ".portlet-content" );
-
-		$( ".portlet-header .ui-icon" ).click(function() {
-			$( this ).toggleClass( "ui-icon-minusthick" ).toggleClass( "ui-icon-plusthick" );
-			$( this ).parents( ".portlet:first" ).find( ".portlet-content" ).toggle();
-		});
-
-		$( ".column" ).disableSelection();
-	});
-	</script>
-
-
-<div class="demo">
-
-<div class="column">
-<strong>1</strong>
-	<div class="portlet">
-		<div class="portlet-header">Feeds</div>
-		<div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+	<?php include('colors.php'); ?>
+</head>
+<body>
+	<div id="msg"></div>
+<div class="content" data-plot="<?=$plotid ?>">
+	<!--meta-->
+	<div class="meta clearfix">
+		<div id="plots-title" class="title editable">Snora and the Cruel Complications</div>
 	</div>
-	
-	<div class="portlet">
-		<div class="portlet-header">News</div>
-		<div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
+	<!--/meta-->
+	<!--columns-->
+	<div id="columns">
+		<div class="column" data-col="1">
+			<div class="column-header">
+				<div class="anchor-title">Anchors</div>
+			</div>
+			<div class="column-content">
+
+			</div>
+			<div class="column-footer">
+				<div class="card-add center"><button class="card-add-btn btn btn-primary"><i class="icon-plus icon-white"></i> Add Card</button></div>
+			</div>
+		</div>
+		<div id="column-ctrl" class="column">
+			<div class="center">
+				<i class="icon-minus column-delete"></i>
+				<i class="icon-plus column-add"></i>
+			</div>
+		</div>
 	</div>
-
+	<!--/columns-->
 </div>
-
-<div class="column">
-<strong>2</strong>
-	<div class="portlet">
-		<div class="portlet-header">Shopping</div>
-		<div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
-	</div>
-
-</div>
-
-<div class="column">
-<strong>3</strong>
-	<div class="portlet">
-		<div class="portlet-header">Links</div>
-		<div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
-	</div>
-	
-	<div class="portlet">
-		<div class="portlet-header">Images</div>
-		<div class="portlet-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
-	</div>
-
-</div>
-<div class="column">
-	<strong>4</strong>
-</div>
-<div class="column">
-	<strong>5</strong>
-</div>
-<div class="column">
-	<strong>6</strong>
-</div>
-<div class="column">
-	<strong>7</strong>
-</div>
-<div class="column">
-	<strong>8</strong>
-</div>
-</div>
+<?php require_once('templates.php'); ?>
+<script src="js/app.js"></script>
+</body>
+</html>
+<?php $dbh = null;
