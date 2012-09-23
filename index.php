@@ -40,10 +40,9 @@ $dbh->query($sql);
 		.column-title{margin-left: 10px; font-size: 12px; font-style: italic; min-height: 35px; font-weight: 600;}
 		.anchor-title{margin-left: 10px; font-size: 12px; font-style: italic; min-height: 35px; font-weight: 600;}
 		.card{margin: 0px 10px 10px 10px;}
-		.card-content-view {margin: 10px; padding: 5px; min-height: 35px;}
+		.card-content-view {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; min-height: 35px;}
 
-		.card-content-edit {padding: 0.4em; line-spacing: 1em;}
-		.card-content-edit textarea{width: 160px; height: 60px;}
+		.card-content-edit {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; line-spacing: 1em;}
 		.ctrl,.ctrl-edit{ margin: 5px 5px 5px 5px;}
 		.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
 		.ui-sortable-placeholder * { visibility: hidden; }
@@ -62,7 +61,7 @@ $dbh->query($sql);
 
 		/* edit form */
 		.card-content-edit{}
-		.card-content-edit textarea{width: 160px; height: 60px;}
+		.card-content-edit textarea{width: 160px; height: 80px;}
 		.card-content-edit .title{float: left; font-size: 12px; font-weight: bold;}
 		.card-add,.card-save,.card-close,.card-delete{cursor: pointer;}
 
@@ -75,7 +74,7 @@ $dbh->query($sql);
 </head>
 <body>
 	<div id="msg"></div>
-<div class="content" data-plot="<?=$plotid ?>">
+<div id="content" class="content" data-plot="<?=$plotid ?>">
 	<!--meta-->
 	<div class="meta clearfix">
 		<div id="plots-title" class="title editable">Snora and the Cruel Complications</div>
@@ -91,13 +90,13 @@ $dbh->query($sql);
 
 			</div>
 			<div class="column-footer">
-				<div class="card-add center"><button class="card-add-btn btn btn-primary"><i class="icon-plus icon-white"></i> Add Card</button></div>
+				<div class="card-add center"><button class="card-add-btn btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Card</button></div>
 			</div>
 		</div>
 		<div id="column-ctrl" class="column">
 			<div class="center">
-				<i class="icon-minus column-delete"></i>
-				<i class="icon-plus column-add"></i>
+				<button class="btn btn-danger btn-small column-delete" style="display: none;"><i class="icon-minus icon-white"></i> Column</button>
+				<button class="btn btn-success btn-small column-add"><i class="icon-plus icon-white"></i> Column</button>
 			</div>
 		</div>
 	</div>

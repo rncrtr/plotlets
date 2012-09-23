@@ -28,9 +28,10 @@ if($_POST){
 
 if($_GET){
 	if($_GET['fn']=='card-add'){
+		$plotid = $_GET['plot'];
 		$col = $_GET['col'];
 		$row = $_GET['row'];
-		$sql = "INSERT INTO cards (content,col,row) VALUES ('edit me',$col,$row);";
+		$sql = "INSERT INTO cards (plot_id,content,col,row) VALUES ($plotid,'edit me',$col,$row);";
 		$dbh->query($sql);
 		$card = $dbh->query("SELECT LAST_INSERT_ID() as id")->fetch();
 		echo json_encode($card);
@@ -44,7 +45,6 @@ if($_GET){
 	if($_GET['fn']=='card-save'){
 		$id = $_GET['id'];
 		$content = $_GET['content'];
-		echo $content;
 		$sql = "UPDATE cards SET content='$content' WHERE id=$id";
 		$dbh->query($sql);
 		echo $content;

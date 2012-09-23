@@ -11,7 +11,7 @@ $(function(){
    		}	
            
 	});
-	console.log(cards);
+	//console.log(cards);
 
 	$( ".card-content-view" )
 		.find( ".card-content" );
@@ -39,14 +39,25 @@ $(function(){
 		console.log('column-add');
 		$('#column-ctrl').before($('#_column').html());
 		$( ".column-content" ).sortable({connectWith: ".column-content"});
-		var colcnt = $('#columns > .column').length;
-		//console.log(colcnt);
-		// minus 1 for the column-add column
-		$(this).parent().parent().prev().attr('data-col',colcnt-1);
+		var colcnt = $('#columns > .column').length - 1;
+		$(this).parent().parent().prev().attr('data-col',colcnt);
+		if(colcnt > 1){
+			$('.column-delete').show();
+		}
 	});
 	$(document).on('click','.column-delete',function(){
+		var me = $(this);
 		console.log('column-delete');
-		$(this).parent().parent().prev().remove();
+		var colcnt = $('#columns > .column').length - 1;
+		smoke.confirm('Delete this column? Are you sure?',function(e){
+			if (e){
+				me.parent().parent().prev().remove();
+				if(colcnt < 3){
+					$('.column-delete').hide();
+				}
+			} 
+		});
+		
 	});
 
 /* CARD FN */	
@@ -56,8 +67,9 @@ $(function(){
 		me.parent().parent().siblings('.column-content').append($('#_card').html());
 		var mycol = me.closest('.column').attr('data-col');
 		var myrow = me.parent().parent().siblings('.column-content').children('.card').size();
+		var plotid = $('#content').attr('data-plot');
 		//console.log(myrow);
-		$.getJSON('ajax.php?fn=card-add&col='+mycol+'&row='+myrow,function(result){
+		$.getJSON('ajax.php?fn=card-add&plot='+plotid+'&col='+mycol+'&row='+myrow,function(result){
 			//console.log(result);
 			me.parent().parent().siblings('.column-content').children('.card:last').attr('data-id',result.id);
 		});
@@ -83,7 +95,11 @@ $(function(){
 		console.log('card-save');
 		var cardid = $(this).closest('.card').attr('data-id');
 		var cardcontent = $(this).siblings('textarea').val();
+		$(this).parent().siblings('.card-content-view').children('.card-content').html(cardcontent);
 		$('#msg').load('ajax.php?fn=card-save&id='+cardid+'&content='+escape(cardcontent));
+		console.log('card-close-after-save');
+		$(this).parent().hide();
+		$(this).parent().siblings('.card-content-view').show();
 		// hide edit icon while in edit mode
 	});
 
@@ -91,8 +107,8 @@ $(function(){
 	$(document).on('click','.card-close',function(){
 		console.log('card-close');
 		$(this).parent().hide();
+		$(this).siblings('textarea').val($(this).parent().siblings('.card-content-view').children('.card-content').html());
 		$(this).parent().siblings('.card-content-view').show();
-		
 	});
 
 	// card delete
