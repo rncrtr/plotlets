@@ -6,27 +6,47 @@ require('db.php');
 if($_POST){
 	// inplace editor
 	$el = $_POST['element_id'];
+	//echo $el;
 	$updval = $_POST['update_value'];
 	$origval = $_POST['orginal_value'];
 	$recid = $_POST['recid'];
 	$dbits = explode('-',$el);
 	$tbl = $dbits[0];
 	$field = $dbits[1];
-	$recid = $dbits[2];
-	$findqry = "SELECT $field FROM $tbl WHERE id=$recid";
-	$rowcnt = count($dbh->query($findqry)->fetchColumn());
-	if($rowcnt > 0){
+	$plotid = $dbits[2];
+	$recid = $dbits[3];
+	$findqry = $dbh->prepare("SELECT $field FROM $tbl WHERE plot_id=$plotid and col=$recid");
+	$findqry->execute();
+	$rowcnt = $findqry->rowCount();
+	//var_dump($findqry->errorInfo());
+	if(isset($rowcnt) && $rowcnt > 0){
 		//echo 'upd row';
-		$qrystr = "UPDATE $tbl SET $field='$updval' WHERE id=$recid";
-		//echo $qrystr;
-		$dbh->query($qrystr);
+		$sql = "UPDATE $tbl SET $field='$updval' WHERE plot_id=$plotid and col=$recid";
+		$dbh->query($sql);
 	}else{	
-		echo 'add new';
+		//echo 'add new';
+		$sql = "INSERT INTO columns (plot_id,title,col) VALUES ($plotid,'$updval',$recid)";
+		$dbh->query($sql);
 	}
 	echo $updval;
 }
 
 if($_GET){
+	if($_GET['fn']=='title-load'){
+		$plotid = $_GET['plot'];
+		$col = $_GET['col'];
+		$sql = $dbh->prepare("SELECT title FROM columns WHERE plot_id=$plotid and col=$col");
+		$sql->execute();
+		$rowcnt = $sql->rowCount();
+		if(isset($rowcnt) && $rowcnt > 0){
+			$sql2 = "SELECT title FROM columns WHERE plot_id=$plotid and col=$col";
+			$title = $dbh->query($sql2)->fetch();
+			echo $title['title'];
+		}else{
+			//echo $rowcnt;
+			echo 'Edit Column Title:';
+		}
+	}
 	if($_GET['fn']=='card-load'){
 		$plotid = $_GET['plot'];
 		$sql = "SELECT cards.*,colors.value as color FROM cards LEFT JOIN colors on cards.color_id=colors.id WHERE plot_id=$plotid ORDER BY col,row ASC";

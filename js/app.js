@@ -1,21 +1,4 @@
 $(function(){
-	var converter = new Showdown.converter();
-/*
-	var cards = $( ".column-content" ).sortable({
-		connectWith: ".column-content",
-		update: function(event, ui) {
-        	console.log('card id: '+ui.item.attr('data-id'));
-        	var myrow = ui.item.index();
-        	var mycol = ui.item.closest('.column').attr('data-col');
-        	console.log("New position: " + mycol +','+myrow);
-        	var cardid = ui.item.attr('data-id');
-        	$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
-   		}	
- 
-	});
-*/          
-	//console.log(cards);
-
 	$( ".card-content-view" )
 		.find( ".card-content" );
 	$( ".column" ).disableSelection();
@@ -44,9 +27,18 @@ $(function(){
 		$( ".column-content" ).sortable({connectWith: ".column-content"});
 		var colcnt = $('#columns > .column').length - 1;
 		$(this).parent().parent().prev().attr('data-col',colcnt);
+		$(this).parent().parent().prev().attr('id','columns-title-'+colcnt);
 		if(colcnt > 1){
 			$('.column-delete').show();
 		}
+		$(".column-title").editInPlace({
+			//callback: function(unused, enteredText) { return enteredText; },
+			url: './ajax.php',
+			field_type: 'textarea',
+			textarea_rows: '5',
+			textarea_cols: '10',
+			show_buttons: true
+		});
 	});
 	$(document).on('click','.column-delete',function(){
 		var me = $(this);
@@ -66,11 +58,12 @@ $(function(){
 /* CARD FN */
 	// card load
 	//$('#msg').load('ajax.php?fn=card-load&plot=1');
-	$.getJSON('ajax.php?fn=card-load&plot=1',function(result){
+	var plotid = $('.plot').attr('data-plot');
+	$.getJSON('ajax.php?fn=card-load&plot='+plotid,function(result){
 		$.each(result, function(){
 			var colcnt = $('#columns > .column').length - 1;
 			console.log('colcnt: '+colcnt);
-			if(this.col > colcnt){
+			while(this.col > colcnt){
 				//create column
 				console.log('column-add');
 				$('#column-ctrl').before($('#_column').html());
@@ -86,9 +79,24 @@ $(function(){
 			   		},
 			   		delay: 500
 				});
-				$('#column-ctrl').prev().attr('data-col',colcnt+1);
+				var truecolnum = colcnt+1;
+				$('#column-ctrl').prev().attr('data-col',truecolnum);
+				$('#column-ctrl').prev().children().find('.column-title').attr('id','columns-title-'+plotid+'-'+truecolnum);
+				$('#column-ctrl').prev().children().find('.column-title').load('ajax.php?fn=title-load&plot='+plotid+'&col='+truecolnum);
 				if(colcnt+1 > 1){
 					$('.column-delete').show();
+				}
+				$(".column-title").editInPlace({
+					//callback: function(unused, enteredText) { return enteredText; },
+					url: './ajax.php',
+					field_type: 'textarea',
+					textarea_rows: '5',
+					textarea_cols: '10',
+					show_buttons: true
+				});
+				colcnt = $('#columns > .column').length - 1;
+				if(this.col == colcnt){
+					break;
 				}
 			}
 			// column with the corrrect data-col id add cards
@@ -123,7 +131,9 @@ $(function(){
 		console.log('card-edit');
 		var oldcontent = $(this).siblings('.card-content').html();
 		oldcontent = oldcontent.replace(/<br>/g,'\r\n');
-		//oldcontent = oldcontent.replace(/\<b\>(.*)\<\/b\>/g, '*$1*');
+		oldcontent = oldcontent.replace(/\<b\>(.*?)\<\/b\>/g, '**$1**');
+		oldcontent = oldcontent.replace(/\<strong\>(.*?)\<\/strong\>/g, '**$1**');
+		oldcontent = oldcontent.replace(/\<em\>(.*?)\<\/em\>/g, '*$1*');
 		$(this).parent().hide();
 		$(this).parent().siblings('.card-content-edit').children('textarea').html(oldcontent);
 		$(this).parent().siblings('.card-content-edit').show();
@@ -141,7 +151,8 @@ $(function(){
 		var cardid = $(this).closest('.card').attr('data-id');
 		var cardcontent = $(this).siblings('textarea').val();
 		cardcontent = cardcontent.replace(/\n\r?/g, '<br>');
-		cardcontent = converter.makeHtml(cardcontent);
+		cardcontent = cardcontent.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+		cardcontent = cardcontent.replace(/\*(.*?)\*/g, '<em>$1</em>');
 		var cardcolor = $(this).closest('.card').attr('data-color-id');
 		$(this).parent().siblings('.card-content-view').children('.card-content').html(cardcontent);
 		$('#msg').load('ajax.php?fn=card-save&id='+cardid+'&content='+escape(cardcontent)+'&color='+cardcolor);

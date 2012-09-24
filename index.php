@@ -21,9 +21,7 @@ $cardid1 = 1;
 <!--smoke signal/alert/confirm-->
 	<link rel="stylesheet" href="js/smoke/smoke.css">
 	<link rel="stylesheet" href="js/smoke/themes/100s.css">
-	<script type="text/javascript" src="js/smoke/smoke.js"></script>
-<!--markdown-->
-	<script src="js/showdown.js"></script>		
+	<script type="text/javascript" src="js/smoke/smoke.js"></script>		
 <!--styles-->
 	<style>
 		*{font-family: helvetica, arial, sans-serif;}
@@ -71,7 +69,7 @@ $cardid1 = 1;
 </head>
 <body>
 <div id="msg"></div>
-<div id="content" class="content" data-plot="<?=$plotid ?>">
+<div id="content" class="content plot" data-plot="<?=$plotid ?>">
 	<!--meta-->
 	<div class="meta clearfix">
 		<div id="plots-title" class="title editable">Snora and the Cruel Complications</div>
