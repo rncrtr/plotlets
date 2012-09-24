@@ -8,16 +8,23 @@ $cardid1 = 1;
 <head>
 	<title>plotlets</title>
 	<meta charset="utf-8">
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<!--jquery/ui-->
 	<link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.8.21.custom.css">
-	<link rel="stylesheet" href="js/smoke/smoke.css">
-	<link rel="stylesheet" href="js/smoke/themes/100s.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" /></script>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" ></script>
+<!--bootstrap-->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<script src="js/bootstrap.min.js"></script>
+<!--edit in place (titles)-->
 	<script src="js/jquery.editinplace.js"></script>
+<!--smoke signal/alert/confirm-->
+	<link rel="stylesheet" href="js/smoke/smoke.css">
+	<link rel="stylesheet" href="js/smoke/themes/100s.css">
 	<script type="text/javascript" src="js/smoke/smoke.js"></script>
+<!--markdown-->
+	<script src="js/showdown.js"></script>		
+<!--styles-->
 	<style>
 		*{font-family: helvetica, arial, sans-serif;}
 		body{font-size: 12px; min-width: 100%; width: 1000%; background: #FFF; margin: 10px;}
@@ -45,18 +52,9 @@ $cardid1 = 1;
 		.ctrl,.ctrl-edit{ margin: 5px 5px 5px 5px;}
 		.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
 		.ui-sortable-placeholder * { visibility: hidden; }
-
-		/*
-		.neon-green{background: #33FF33; color: #000;}
-		.light-blue{background: #33A1DE; color: #000;}
-		.blue{background: #0000FF; color: #FFF;}
-		.red{background: #E3170D; color: #FFF;}
-		.yellow{background: #E6B426; color: #000;}
-		*/
 		.title input.inplace_field{width: 300px;}
 		.column-title input.inplace_field{width: 160px;}
 		textarea.inplace_field{width: 160px; height: 60px;}
-
 
 		/* edit form */
 		.card-content-edit{}
@@ -72,7 +70,7 @@ $cardid1 = 1;
 	<?php include('colors.php'); ?>
 </head>
 <body>
-	<div id="msg"></div>
+<div id="msg"></div>
 <div id="content" class="content" data-plot="<?=$plotid ?>">
 	<!--meta-->
 	<div class="meta clearfix">
@@ -85,9 +83,7 @@ $cardid1 = 1;
 			<div class="column-header">
 				<div class="anchor-title">Anchors</div>
 			</div>
-			<div class="column-content">
-
-			</div>
+			<div class="column-content"></div>
 			<div class="column-footer">
 				<div class="card-add center"><button class="card-add-btn btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Card</button></div>
 			</div>

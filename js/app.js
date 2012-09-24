@@ -1,4 +1,6 @@
 $(function(){
+	var converter = new Showdown.converter();
+/*
 	var cards = $( ".column-content" ).sortable({
 		connectWith: ".column-content",
 		update: function(event, ui) {
@@ -9,8 +11,9 @@ $(function(){
         	var cardid = ui.item.attr('data-id');
         	$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
    		}	
-           
+ 
 	});
+*/          
 	//console.log(cards);
 
 	$( ".card-content-view" )
@@ -71,7 +74,18 @@ $(function(){
 				//create column
 				console.log('column-add');
 				$('#column-ctrl').before($('#_column').html());
-				$( ".column-content" ).sortable({connectWith: ".column-content"});
+				$( ".column-content" ).sortable({
+					connectWith: ".column-content",
+					update: function(event, ui) {
+			        	console.log('card id: '+ui.item.attr('data-id'));
+			        	var myrow = ui.item.index()+1;
+			        	var mycol = ui.item.closest('.column').attr('data-col');
+			        	console.log("New position: " + mycol +','+myrow);
+			        	var cardid = ui.item.attr('data-id');
+			        	$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
+			   		},
+			   		delay: 500
+				});
 				$('#column-ctrl').prev().attr('data-col',colcnt+1);
 				if(colcnt+1 > 1){
 					$('.column-delete').show();
@@ -108,6 +122,8 @@ $(function(){
 	$(document).on('click','.card-edit',function(){
 		console.log('card-edit');
 		var oldcontent = $(this).siblings('.card-content').html();
+		oldcontent = oldcontent.replace(/<br>/g,'\r\n');
+		//oldcontent = oldcontent.replace(/\<b\>(.*)\<\/b\>/g, '*$1*');
 		$(this).parent().hide();
 		$(this).parent().siblings('.card-content-edit').children('textarea').html(oldcontent);
 		$(this).parent().siblings('.card-content-edit').show();
@@ -124,6 +140,8 @@ $(function(){
 		console.log('card-save');
 		var cardid = $(this).closest('.card').attr('data-id');
 		var cardcontent = $(this).siblings('textarea').val();
+		cardcontent = cardcontent.replace(/\n\r?/g, '<br>');
+		cardcontent = converter.makeHtml(cardcontent);
 		var cardcolor = $(this).closest('.card').attr('data-color-id');
 		$(this).parent().siblings('.card-content-view').children('.card-content').html(cardcontent);
 		$('#msg').load('ajax.php?fn=card-save&id='+cardid+'&content='+escape(cardcontent)+'&color='+cardcolor);
@@ -165,4 +183,3 @@ $(function(){
 		$(this).closest('.card-content-edit').css('background-color','#'+$(this).closest('.card').attr('data-color-value'));
 	});
 });
-
