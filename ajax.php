@@ -3,18 +3,7 @@ header('Content-Type: application/json');
 require('db.php'); 
 ?>
 <?php
-if($_POST){
-	// inplace editor
-	$el = $_POST['element_id'];
-	//echo $el;
-	$updval = $_POST['update_value'];
-	$origval = $_POST['orginal_value'];
-	$recid = $_POST['recid'];
-	$dbits = explode('-',$el);
-	$tbl = $dbits[0];
-	$field = $dbits[1];
-	$plotid = $dbits[2];
-	$recid = $dbits[3];
+/*
 	$findqry = $dbh->prepare("SELECT $field FROM $tbl WHERE plot_id=$plotid and col=$recid");
 	$findqry->execute();
 	$rowcnt = $findqry->rowCount();
@@ -29,22 +18,28 @@ if($_POST){
 		$dbh->query($sql);
 	}
 	echo $updval;
-}
+*/
 
 if($_GET){
-	if($_GET['fn']=='title-load'){
+	if($_GET['fn']=='title-save'){
 		$plotid = $_GET['plot'];
 		$col = $_GET['col'];
-		$sql = $dbh->prepare("SELECT title FROM columns WHERE plot_id=$plotid and col=$col");
-		$sql->execute();
-		$rowcnt = $sql->rowCount();
+		$content = $_GET['content'];
+		$sql = "SELECT content FROM cards WHERE plot_id=$plotid and col=$col and row=0";
+		$qry = $dbh->prepare($sql);
+		$qry->execute();
+		$rowcnt = $qry->rowCount();
+		echo $rowcnt;
 		if(isset($rowcnt) && $rowcnt > 0){
-			$sql2 = "SELECT title FROM columns WHERE plot_id=$plotid and col=$col";
-			$title = $dbh->query($sql2)->fetch();
-			echo $title['title'];
+			$sql2 = "UPDATE cards SET content='$content' WHERE plot_id=$plotid and col=$col and row=0";
+			$title = $dbh->query($sql2);
+			echo $sql2;
+			echo $content;
 		}else{
-			//echo $rowcnt;
-			echo 'Edit Column Title:';
+			$sql3 = "INSERT INTO cards (plot_id,content,col,row) VALUES ($plotid,'$content',$col,0);";
+			$title = $dbh->query($sql3);
+			echo $sql3;
+			echo $content;
 		}
 	}
 	if($_GET['fn']=='card-load'){

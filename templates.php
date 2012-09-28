@@ -3,7 +3,7 @@
 	<div id="_column">
 		<div class="column">
 			<div class="column-header">
-				<div class="column-title">Edit Column Title:</div>
+				<div class="column-title"></div>
 			</div>
 			<div class="column-content"></div>
 			<div class="column-footer">
@@ -28,6 +28,21 @@
 				<i class="icon-trash fl card-delete"></i>
 				<i class="icon-remove icon-red fr card-close"></i>
 				<i class="icon-ok icon-green fr card-save"></i>
+			</div>
+		</div>
+	</div>
+	<div id="_titlecard">
+		<div class="title-card">
+			<div class="card-content-view cf">
+				<div class="title-content">column title</div>
+				<!--<i class="icon-trash fl card-delete"></i>-->
+				<i class="icon-pencil icon-blue fr card-edit"></i>
+			</div>
+			<div class="card-content-edit cf" style="display: none;">
+				<textarea></textarea>
+				<!--<i class="icon-trash fl card-delete"></i>-->
+				<i class="icon-remove icon-red fr card-close"></i>
+				<i class="icon-ok icon-green fr title-save"></i>
 			</div>
 		</div>
 	</div>
