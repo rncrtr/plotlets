@@ -21,6 +21,22 @@ require('db.php');
 */
 
 if($_GET){
+	if($_GET['fn']=='plot-add'){
+		$title = $_GET['title'];
+		$sql = "INSERT INTO plots (title) VALUES ('$title');";
+		$dbh->query($sql);
+		$plot = $dbh->query("SELECT LAST_INSERT_ID() as id")->fetch();
+		echo json_encode($plot);
+	}
+
+	if($_GET['fn']=='plot-load'){
+		$userid = $_GET['user'];
+		$qry = $dbh->prepare("SELECT id,user_id,title FROM plots WHERE user_id=$userid");
+		$qry->execute();
+		$plots = $qry->fetchAll();
+		echo json_encode($plots);
+	}
+
 	if($_GET['fn']=='title-save'){
 		$plotid = $_GET['plot'];
 		$col = $_GET['col'];
@@ -41,6 +57,12 @@ if($_GET){
 			echo $sql3;
 			echo $content;
 		}
+	}
+	if($_GET['fn']=='plot-title-load'){
+		$plotid = $_GET['plot'];
+		$sql = "SELECT title FROM plots WHERE id=$plotid";
+		$plottitle = $dbh->query($sql)->fetch();
+		echo $plottitle['title'];
 	}
 	if($_GET['fn']=='card-load'){
 		$plotid = $_GET['plot'];

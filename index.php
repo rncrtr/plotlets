@@ -5,27 +5,27 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 	$userid = $_SESSION['userid'];
 	//echo $userid;
 	if(isset($_GET['plots'])){ ?>
-		<div class="offset1">
-		<form name="plot-view" action="/plotlets/" method="post">
-		<h2 style="color: #08C;">plots</h2><br />
-		<?php
-		$qry = $dbh->prepare("SELECT * FROM plots WHERE user_id=$userid");
-		$qry->execute();
-		$plots = $qry->fetchAll();
-		foreach($plots as $plot){ 
-		?>
-			<div class="fl plot-ctrl">
-				<button type="button" id="plot_<?= $plot['id'] ?>" class="plot-view btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;View/Edit</button>
-			</div>
-			<div class="fl plot-block">
-				<h3><?= $plot['title'] ?></h3>
-				<p class="plot-desc"><?= $plot['desc'] ?></p>
-			</div>
-			<div class="cf"></div>
-			<div class="hr">
-		<?php } ?>
-		<input id="plotid" name="plotid" type="hidden" />
-		</form>
+		<script>
+			$('#plot-title').html('plots');
+			// plot load
+			var userid = <?= $userid ?>;
+				$.getJSON('ajax.php?fn=plot-load&user='+userid,function(result){
+					$.each(result, function(){
+						console.log(this.title);
+						$('#plots').append($('#_plot').html());
+						var thisplot = $('#plots .plot:last-child');
+						thisplot.children('.plot-ctrl').children('button').attr('data-plot-id',this.id);
+						thisplot.children('.plot-list-title').html(this.title);
+					});
+				});
+		</script>
+		<label>Add New Plot:</label>
+		<div id="plot-add" class="form-inline">
+			<input type="text" class="input-large" placeholder="Plot Title">
+			<button class="btn btn-success plot-add-btn"><i class="icon-ok icon-white"></i> Save</button>
+		</div><br />
+		<h2>Your Plots:</h2><br />
+		<div id="plots">
 		</div>
 	<?php }elseif(isset($_GET['logout'])){
 		session_unset();
@@ -33,12 +33,8 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 		$_SESSION = array();
 		echo 'You have been logged out. <a href="/plotlets/">Login</a> again?';
 	}else{ ?>
-	<div id="content" class="content plot" data-plot="<?=$_POST['plotid'] ?>">
-		<!--meta-->
-		<div class="meta clearfix">
-			<div id="plots-title" class="title editable">Plot Title Here</div>
-		</div>
-		<!--/meta-->
+	<div id="content" class="content plot" data-plot="<?=$_GET['p'] ?>">
+		<div class="hr" style="margin-top: -10px;"></div><br />
 		<!--columns-->
 		<div id="columns">
 			<div class="column" data-col="1">
@@ -70,7 +66,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
     	$_SESSION['userid'] = $checklogin->fetchColumn();
         $_SESSION['email'] = $email;   
         $_SESSION['loggedin'] = 1;  
-        echo "<meta http-equiv='refresh' content='=2;/plotlets/' />";  
+        echo '<script>window.location.href="/plotlets/?plots";</script>';
     }else{  
         echo "<h1>Error</h1>";  
         echo "<p>Sorry, your account could not be found. Please <a href=\"index.php\">click here to try again</a>.</p>";  

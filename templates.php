@@ -1,5 +1,15 @@
 <!--TEMPLATES-->
 <div id="templates" class="hidden">
+	<div id="_plot">
+		<div class="plot">
+			<div class="fl plot-ctrl">
+				<button type="button" class="plot-view btn btn-small btn-info"><i class="icon-search icon-white"></i>&nbsp;View/Edit</button>
+			</div>
+			<div class="fl plot-list-title"></div>
+			<div class="cf">&nbsp;</div>
+			<br />
+		</div>
+	</div>
 	<div id="_column">
 		<div class="column">
 			<div class="column-header">
@@ -36,12 +46,12 @@
 			<div class="card-content-view cf">
 				<div class="title-content">column title</div>
 				<!--<i class="icon-trash fl card-delete"></i>-->
-				<i class="icon-pencil icon-blue fr card-edit"></i>
+				<i class="icon-pencil icon-blue fr title-edit"></i>
 			</div>
 			<div class="card-content-edit cf" style="display: none;">
 				<textarea></textarea>
 				<!--<i class="icon-trash fl card-delete"></i>-->
-				<i class="icon-remove icon-red fr card-close"></i>
+				<i class="icon-remove icon-red fr title-close"></i>
 				<i class="icon-ok icon-green fr title-save"></i>
 			</div>
 		</div>

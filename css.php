@@ -1,28 +1,33 @@
 <!--styles-->
 	<style>
 		*{font-family: helvetica, arial, sans-serif;}
-		body{font-size: 12px; background: #FFF; margin: 10px;}
-		.wrap{width: 1000%;}
+		body{font-size: 12px; background: #FFF; margin: 0px; height: 100%; width: 100%;}
+		#wrap{margin: 0px 0px 0px 10px;}
+		#header{}
 		.left{text-align: left;}
 		.center{text-align: center;}
 		.right{text-align: right;}
 		.hidden{display: none;}
 		.fl{float: left;}
 		.fr{float: right;}
-		.hr{border: 1px solid #e0e0e0; width: 855px;}
+		.hr{border: 1px solid #e0e0e0;}
 		.para{float: left;position: relative;left: 50%;}
 		.llax{float: left;position: relative;left: -50%;}
-		.meta{padding-bottom: 10px; padding-left: 10px;}
-		.app-title{margin-left: 10px;}
-		.meta .title{font-size: 16px; width: 450px; border: 0px; border-bottom: 1px solid #00137F; margin-top: 10px; padding: 5px 10px 5px 0px; }
+		.meta{padding-bottom: 10px; padding-left: 0px;}
+		.app-title{margin-left: 0px;}
+		#plot-title{margin-left: 10px; margin-top: 10px; font-size: 26px; color: #08C;}
 		.nav-ctrl{margin: 0px; padding: 0px; line-height: 1em;}
-		#nav a{margin-right: 10px; font-size: 16px;}
+		#nav a{margin-right: 10px; font-size: 14px;}
+
+		/* columns */
 		.column {font-family: helvetica, arial, sans-serif; width: 200px; float: left; min-height: 600px; border-right: 1px solid #e0e0e0;}
 		.column:last-child{border-right: 0px;}
 		.column-content{min-height: 50px;}
 		.column-ctrl{margin: 10px; min-height: 35px;}
 		.column-title{margin-left: 10px; font-size: 12px; min-height: 35px; font-weight: 600;}
-		.anchor-title{margin-left: 10px; line-height: 1em; font-size: 12px; min-height: 35px; height: 50px; font-weight: 600;}
+		.anchor-title{margin-left: 10px; line-height: 1em; font-size: 12px; min-height: 35px; font-weight: 600;}
+		
+		/* cards */
 		.card{margin: 0px 10px 10px 10px;}
 		.title-card .card-content-view{margin: 0px 10px -10px 0px !important;}
 		.rounded{-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; border: 1px solid #d8d8d8;}
@@ -45,9 +50,11 @@
 		.colorclick{float: left; font-size: 11px; height: 12px; width: 12px; border: 1px solid #000; text-align: center; margin-right: 3px; cursor: pointer;}
 		.columnclick{float: left; font-size: 11px; width: 10px; border: 0px solid #696969; text-align: center; margin-right: 5px; cursor: pointer;}
 		
+		/* plot */
 
 		/* plot list */
-		.plot-ctrl{margin-left: -110px;}
+		.plot-list-title{margin-top: 4px; font-size: 18px; color: #000;}
+		.plot-ctrl{margin-right: 30px;}
 		.plot-block{margin-left: 0px;}
 		.plot-desc{width: 500px;}
 	</style>

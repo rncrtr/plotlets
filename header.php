@@ -4,6 +4,7 @@ $root = '/plotlets';
 require_once('db.php');
 $plotid = 1;
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,8 @@ $plotid = 1;
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<script src="js/bootstrap.min.js"></script>
+<!--stripe-->
+<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
 <!--smoke signal/alert/confirm-->
 	<link rel="stylesheet" href="js/smoke/smoke.css">
 	<link rel="stylesheet" href="js/smoke/themes/100s.css">
@@ -26,13 +29,16 @@ $plotid = 1;
 </head>
 <body>
 	<div id="wrap">
-		<?php if(!empty($_SESSION['loggedin'])){ ?>
-			<h1 class="app-title">plotlets</h1>
-		<?php } ?>
-		<div id="nav" class="fl right" style="width: 1000px; margin-top: -40px;">
+		<div id="header">
 			<?php if(!empty($_SESSION['loggedin'])){ ?>
-				<a href="?plots">plots</a>
-				<a href="?logout">logout</a>
+				<h1 id="app-title" class="app-title fl">plotlets:</h1>
+				<div id="plot-title" class="fl"></div>
+				<div class="cf"></div>
+				<div id="nav" class="fl right">
+					<a href="?plots">plots</a>
+					<a href="?logout">logout</a>
+				</div>
+				<div class="cf"></div><br />
 			<?php } ?>
 		</div>
 		<div id="msg"></div>

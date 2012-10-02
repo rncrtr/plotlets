@@ -1,13 +1,27 @@
 $(function(){
+
 	$( ".card-content-view" )
 		.find( ".card-content" );
 	$( ".column" ).disableSelection();
-/* plot FN */
-	$(document).on('click','.plot-view',function(){
-		console.log('plot-view');
-		$('#plotid').val($(this).attr('id').replace(/plot_/,''));
-		$('form[name=plot-view]').submit();
+
+/* PLOT FN */
+	// plot add
+	$(document).on('click','.plot-add-btn',function(){
+		var me = $(this);
+		$.getJSON('ajax.php?fn=plot-add&title=',function(result){
+			//console.log(result);
+			me.attr('data-plot',result.id);
+		});
 	});
+
+	// plot view
+	$(document).on('click','.plot-view',function(){
+		var me = $(this);
+		var plotid = me.attr('data-plot-id');
+		window.location.href = '/plotlets/?p='+plotid;
+	});
+
+
 /* COLUMN FN */
 	$(document).on('click','.column-add',function(){
 		console.log('column-add');
@@ -48,66 +62,69 @@ $(function(){
 	// card load
 	//$('#msg').load('ajax.php?fn=card-load&plot=1');
 	var plotid = $('.plot').attr('data-plot');
-	$.getJSON('ajax.php?fn=card-load&plot='+plotid,function(result){
-		$.each(result, function(){
-			var colcnt = $('#columns > .column').length - 1;
-			console.log('colcnt: '+colcnt);
-			while(this.col > colcnt){
-				//create column
-				console.log('column-add');
-				$('#column-ctrl').before($('#_column').html());
-				$( ".column-content" ).sortable({
-					connectWith: ".column-content",
-					update: function(event, ui) {
-			        	console.log('card id: '+ui.item.attr('data-id'));
-			        	var myrow = ui.item.index()+1;
-			        	var mycol = ui.item.closest('.column').attr('data-col');
-			        	console.log("New position: " + mycol +','+myrow);
-			        	var cardid = ui.item.attr('data-id');
-			        	$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
-			   		},
-			   		delay: 300
-				});
-				var wrapwidth = $('#wrap').css('width').replace(/px/, "");
-				var columnwidth = $('.column:last').css('width').replace(/px/, "");
-				console.log('colwidth: '+columnwidth);
-				var newwrap = parseInt(wrapwidth) + parseInt(columnwidth);
-				$('#wrap').css('width',newwrap+'px');
-				console.log('wrapwidth: '+$('#wrap').css('width'));
-				var truecolnum = colcnt+1;
-				$('#column-ctrl').prev().attr('data-col',truecolnum);
-				$('#column-ctrl').prev().children('.column-header').children('.column-title').append($('#_titlecard').html());
-				//$('#column-ctrl').prev().children().find('.column-title').attr('id','columns-title-'+plotid+'-'+truecolnum);
-				//$('#column-ctrl').prev().children().find('.column-title').load('ajax.php?fn=title-load&plot='+plotid+'&col='+truecolnum);
-				if(colcnt+1 > 1){
-					$('.column-delete').show();
-				}
+	if(plotid > 0){
+		$('#plot-title').load('ajax.php?fn=plot-title-load&plot='+plotid);
+		$.getJSON('ajax.php?fn=card-load&plot='+plotid,function(result){
+			$.each(result, function(){
+				var colcnt = $('#columns > .column').length - 1;
+				console.log('colcnt: '+colcnt);
+				while(this.col > colcnt){
+					//create column
+					console.log('column-add');
+					$('#column-ctrl').before($('#_column').html());
+					$( ".column-content" ).sortable({
+						connectWith: ".column-content",
+						update: function(event, ui) {
+				        	console.log('card id: '+ui.item.attr('data-id'));
+				        	var myrow = ui.item.index()+1;
+				        	var mycol = ui.item.closest('.column').attr('data-col');
+				        	console.log("New position: " + mycol +','+myrow);
+				        	var cardid = ui.item.attr('data-id');
+				        	$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
+				   		},
+				   		delay: 300
+					});
+					var wrapwidth = $('#wrap').css('width').replace(/px/, "");
+					var columnwidth = $('.column:last').css('width').replace(/px/, "");
+					console.log('colwidth: '+columnwidth);
+					var newwrap = parseInt(wrapwidth) + parseInt(columnwidth);
+					$('#wrap').css('width',newwrap+'px');
+					console.log('wrapwidth: '+$('#wrap').css('width'));
+					var truecolnum = colcnt+1;
+					$('#column-ctrl').prev().attr('data-col',truecolnum);
+					$('#column-ctrl').prev().children('.column-header').children('.column-title').append($('#_titlecard').html());
+					//$('#column-ctrl').prev().children().find('.column-title').attr('id','columns-title-'+plotid+'-'+truecolnum);
+					//$('#column-ctrl').prev().children().find('.column-title').load('ajax.php?fn=title-load&plot='+plotid+'&col='+truecolnum);
+					if(colcnt+1 > 1){
+						$('.column-delete').show();
+					}
 
-				colcnt = $('#columns > .column').length - 1;
-				if(this.col == colcnt){
-					break;
+					colcnt = $('#columns > .column').length - 1;
+					if(this.col == colcnt){
+						break;
+					}
 				}
-			}
-			// column with the corrrect data-col id add cards
-			var datacol = '.column[data-col='+this.col+']';
+				// column with the corrrect data-col id add cards
+				var datacol = '.column[data-col='+this.col+']';
 
-			if(this.row == 0){
-				$(datacol).children('.column-header').children('.column-title').children('.title-card').children('.card-content-view').children('.title-content').html(this.content);
-				$(datacol).children('.column-header').children('.column-title').children('.title-card').attr('data-id',this.id);
-			}else{
-				$(datacol).children('.column-title').append($('#_titlecard').html());
-				$(datacol).children('.column-content').append($('#_card').html());
-				var thiscard = $(datacol).children('.column-content').children('.card:last');
-				var thistitle = $(datacol).children('.column-title').children('.title-card');
-				thiscard.attr('data-id',this.id);
-				thiscard.find('.card-content').html(this.content);
-				thiscard.attr('data-color-value',this.color);
-				thiscard.attr('data-color-id',this.color_id);
-				thiscard.children('.card-content-view').css('background-color','#'+this.color);
-				thiscard.children('.card-content-edit').css('background-color','#'+this.color);
-			}
-		});
-	});
+				if(this.row == 0){
+					$(datacol).children('.column-header').children('.column-title').children('.title-card').children('.card-content-view').children('.title-content').html(this.content);
+					$(datacol).children('.column-header').children('.column-title').children('.title-card').attr('data-id',this.id);
+				}else{
+					$(datacol).children('.column-title').append($('#_titlecard').html());
+					$(datacol).children('.column-content').append($('#_card').html());
+					var thiscard = $(datacol).children('.column-content').children('.card:last');
+					var thistitle = $(datacol).children('.column-title').children('.title-card');
+					thiscard.attr('data-id',this.id);
+					thiscard.find('.card-content').html(this.content);
+					thiscard.attr('data-color-value',this.color);
+					thiscard.attr('data-color-id',this.color_id);
+					thiscard.children('.card-content-view').css('background-color','#'+this.color);
+					thiscard.children('.card-content-edit').css('background-color','#'+this.color);
+				}
+			}); // each
+		}); // getJSON
+	}
 
 	// card add
 	$(document).on('click','.card-add-btn',function(){
@@ -125,21 +142,38 @@ $(function(){
 
 	// card edit
 	$(document).on('click','.card-edit',function(){
+		var me = $(this);
 		console.log('card-edit');
 		var oldcontent = $(this).siblings('.card-content').html();
-		if(oldcontent!=null){
+		if(oldcontent!=null && oldcontent!=""){
 			oldcontent = html2md(oldcontent);
-		}
-		var titlecontent = $(this).siblings('.title-content').html();
-		if(titlecontent!=null){
-			var oldcontent = html2md(titlecontent);
 		}
 		$(this).parent().hide();
 		$(this).parent().siblings('.card-content-edit').children('textarea').html(oldcontent);
 		$(this).parent().siblings('.card-content-edit').show();
-		/* $.getJSON('ajax.php?fn=card-edit&id=1',function(result){
+		$.getJSON('ajax.php?fn=card-edit&id=1',function(result){
 			me.parent().parent('.card').before($('#_card-editor').html());
-		}); */
+		});
+		// hide edit icon while in edit mode
+		//$(this).parent().hide();
+		//$(this).parent().siblings('.portlet-content-edit').removeClass('hidden');
+	});
+
+	// title edit
+	$(document).on('click','.title-edit',function(){
+		var me = $(this);
+		console.log('card-edit');
+		var titlecontent = $(this).siblings('.title-content').html();
+		console.log(titlecontent);
+		if(titlecontent!=null && titlecontent!=""){
+			titlecontent = html2md(titlecontent);
+		}
+		$(this).parent().hide();
+		$(this).parent().siblings('.card-content-edit').show();
+		$(this).parent().siblings('.card-content-edit').children('textarea').html(titlecontent);
+		$.getJSON('ajax.php?fn=card-edit&id=1',function(result){
+			me.parent().parent('.card').before($('#_card-editor').html());
+		});
 		// hide edit icon while in edit mode
 		//$(this).parent().hide();
 		//$(this).parent().siblings('.portlet-content-edit').removeClass('hidden');
@@ -189,6 +223,14 @@ $(function(){
 		$(this).parent().siblings('.card-content-view').show();
 	});
 
+	// title close
+	$(document).on('click','.title-close',function(){
+		console.log('title-close');
+		$(this).parent().hide();
+		$(this).siblings('textarea').val($(this).parent().siblings('.card-content-view').children('.title-content').html());
+		$(this).parent().siblings('.card-content-view').show();
+	});
+
 	// card delete
 	$(document).on('click','.card-delete',function(){
 		var me = $(this);
@@ -202,6 +244,8 @@ $(function(){
 		},{ok: 'Delete it',cancel: "Keep it"});
 		
 	});
+
+
 
 	// color click
 	$(document).on('click','.colorclick',function(){
