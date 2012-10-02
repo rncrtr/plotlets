@@ -22,8 +22,9 @@ require('db.php');
 
 if($_GET){
 	if($_GET['fn']=='plot-add'){
+		$userid = $_GET['user'];
 		$title = $_GET['title'];
-		$sql = "INSERT INTO plots (title) VALUES ('$title');";
+		$sql = "INSERT INTO plots (user_id,title) VALUES ($userid,'$title');";
 		$dbh->query($sql);
 		$plot = $dbh->query("SELECT LAST_INSERT_ID() as id")->fetch();
 		echo json_encode($plot);

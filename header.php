@@ -32,7 +32,7 @@ $plotid = 1;
 		<div id="header">
 			<?php if(!empty($_SESSION['loggedin'])){ ?>
 				<h1 id="app-title" class="app-title fl">plotlets:</h1>
-				<div id="plot-title" class="fl"></div>
+				<div id="page-title" class="fl"></div>
 				<div class="cf"></div>
 				<div id="nav" class="fl right">
 					<a href="?plots">plots</a>

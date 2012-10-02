@@ -6,7 +6,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 	//echo $userid;
 	if(isset($_GET['plots'])){ ?>
 		<script>
-			$('#plot-title').html('plots');
+			$('#page-title').html('plots');
 			// plot load
 			var userid = <?= $userid ?>;
 				$.getJSON('ajax.php?fn=plot-load&user='+userid,function(result){
@@ -21,7 +21,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 		</script>
 		<label>Add New Plot:</label>
 		<div id="plot-add" class="form-inline">
-			<input type="text" class="input-large" placeholder="Plot Title">
+			<input id="plot-title" type="text" class="input-large" data-user="<?= $userid ?>" placeholder="Plot Title">
 			<button class="btn btn-success plot-add-btn"><i class="icon-ok icon-white"></i> Save</button>
 		</div><br />
 		<h2>Your Plots:</h2><br />

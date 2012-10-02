@@ -15,7 +15,7 @@
 		.llax{float: left;position: relative;left: -50%;}
 		.meta{padding-bottom: 10px; padding-left: 0px;}
 		.app-title{margin-left: 0px;}
-		#plot-title{margin-left: 10px; margin-top: 10px; font-size: 26px; color: #08C;}
+		#page-title{margin-left: 10px; margin-top: 10px; font-size: 26px; color: #08C;}
 		.nav-ctrl{margin: 0px; padding: 0px; line-height: 1em;}
 		#nav a{margin-right: 10px; font-size: 14px;}
 

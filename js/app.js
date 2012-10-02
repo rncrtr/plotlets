@@ -8,7 +8,10 @@ $(function(){
 	// plot add
 	$(document).on('click','.plot-add-btn',function(){
 		var me = $(this);
-		$.getJSON('ajax.php?fn=plot-add&title=',function(result){
+		console.log('plot-add');
+		var plottitle = me.siblings('#plot-title').val();
+		var userid = me.siblings('#plot-title').attr('data-user');
+		$.getJSON('ajax.php?fn=plot-add&user='+userid+'&title='+escape(plottitle),function(result){
 			//console.log(result);
 			me.attr('data-plot',result.id);
 		});
@@ -63,7 +66,7 @@ $(function(){
 	//$('#msg').load('ajax.php?fn=card-load&plot=1');
 	var plotid = $('.plot').attr('data-plot');
 	if(plotid > 0){
-		$('#plot-title').load('ajax.php?fn=plot-title-load&plot='+plotid);
+		$('#page-title').load('ajax.php?fn=plot-title-load&plot='+plotid);
 		$.getJSON('ajax.php?fn=card-load&plot='+plotid,function(result){
 			$.each(result, function(){
 				var colcnt = $('#columns > .column').length - 1;
