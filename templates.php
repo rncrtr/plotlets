@@ -21,7 +21,6 @@
 	</div>
 	<div id="_column">
 		<div class="column">
-			<span class="column-num fl"></span>
 			<i class="icon-plus icon-green fr column-add-top"></i>
 			<i class="icon-minus icon-red fr column-delete-top"></i>
 			<div class="column-header">
@@ -29,18 +28,16 @@
 					<span class="column-ctrl-text">Move column before:</span>
 					<select class="column-move-select center" data-select-col="">
 						<option value="x">--</option>
-						<option value="0">1</option>
-						<option value="1">2</option>
-						<option value="2">3</option>
-						<option value="3">4</option>
-						<option value="4">5</option>
-						<option value="5">6</option>
-						<option value="6">7</option>
-						<option value="7">8</option>
-						<option value="8">9</option>
-						<option value="9">10</option>
-						<option value="10">11</option>
-						<option value="11">12</option>
+						<option value="0">1. A Strange Place for Waking</option>
+						<option value="1">2. blah blah blah column title</option>
+						<option value="2">3. blah blah column title</option>
+						<option value="3">4. blah blah blah title</option>
+						<option value="4">5. blah blah blah column title</option>
+						<option value="5">6. blah blah blah column title</option>
+						<option value="6">7. blah column title</option>
+						<option value="7">8. blah blah blah column title</option>
+						<option value="8">9. column title</option>
+						<option value="9">10. blah blah blah column title</option>
 					</select>
 				</div>
 				<div class="column-title"></div>
@@ -66,8 +63,8 @@
 					<?php } ?>
 				</div>
 				<i class="icon-trash fl card-delete"></i>
-				<i class="icon-remove icon-red fr card-close"></i>
 				<i class="icon-ok icon-green fr card-save"></i>
+				<i class="icon-remove icon-red fr card-close"></i>
 			</div>
 		</div>
 	</div>
@@ -81,8 +78,9 @@
 			<div class="card-content-edit cf" style="display: none;">
 				<textarea></textarea>
 				<!--<i class="icon-trash fl card-delete"></i>-->
-				<i class="icon-remove icon-red fr title-close"></i>
 				<i class="icon-ok icon-green fr title-save"></i>
+				<i class="icon-remove icon-red fr title-close"></i>
+				
 			</div>
 		</div>
 	</div>

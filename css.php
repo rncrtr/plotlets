@@ -28,25 +28,24 @@
 		.column-ctrl-text{margin-left: 10px; margin-right: 5px; font-weight: bold;}
 		.column-delete-top{margin: -25px 20px 0px 0px; width: 16px; height: 16px;}
 		.column-add-top{margin: -25px 0px 0px 0px; width: 16px; height: 16px;}
-		.column-num{margin-top: -25px; font-weight: bold; margin-left: 15px; font-size: 14px;}
-		.column-title{margin-left: 10px; font-size: 12px; min-height: 35px; font-weight: 600;}
-		.anchor-title{margin-left: 10px; margin-top: 5px; line-height: 1em; font-size: 12px; min-height: 30px; font-weight: 600;}
+		.column-num{margin-top: 5px; font-weight: bold; margin-left: 5px; font-size: 14px;}
+		.column-title{margin-left: 5px; font-size: 12px; min-height: 35px; font-weight: 600;}
+		.anchor-title{margin-left: 10px; margin-top: 5px; line-height: 1em; font-size: 12px; min-height: 35px; font-weight: 600;}
 		
 		/* cards */
 		.card{margin: 0px 10px 10px 10px;}
-		.title-card .card-content-view{margin: 0px 10px -10px 0px !important;}
-		.title-card .card-content-edit textarea{width: 170px; margin-left: -5px; height: 38px;}
+		.title-content{width: 180px;}
+		.title-card .card-content-view{width: 180px; margin: 0px 0px -5px 0px !important;}
+		.title-card .card-content-edit{width: 180px;}
+		.title-card .card-content-edit textarea{width: 170px; margin-left: 0px; margin-bottom: 0px; height: 38px;}
 		.rounded{-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; border: 1px solid #d8d8d8;}
-		.card-content-view {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; min-height: 35px;}
-		.card-content-view {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; min-height: 35px;}
-
-		.card-content-edit {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; line-spacing: 1em;}
+		.card-content-view {width: 170px; margin: 10px 0px 10px 0px; padding: 5px; min-height: 35px;}
+		.card-content-edit {width: 170px; margin: 10px 0px 10px 0px; padding: 5px; line-spacing: 1em;}
 		.ctrl,.ctrl-edit{ margin: 5px 5px 5px 5px;}
 		.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 50px !important; }
 		.ui-sortable-placeholder * { visibility: hidden; }
 
 		/* edit form */
-		.card-content-edit{}
 		.card-content-edit textarea{width: 160px; height: 80px;}
 		.card-content-edit .title{float: left; font-size: 12px; font-weight: bold;}
 		.card-add,.card-save,.card-close,.card-delete{cursor: pointer;}

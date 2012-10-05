@@ -1,4 +1,5 @@
 <?php include('header.php'); ?>
+<?php $root = '/plotlets/'; ?>
 <?php
 if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 	<?php 
@@ -31,7 +32,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 		session_unset();
 		session_destroy();
 		$_SESSION = array();
-		echo 'You have been logged out. <a href="/plotlets/">login</a> again?';
+		echo 'You have been logged out. <a href="'.$root.'">login</a> again?';
 	}else{
 		if(isset($_GET['p']) && $_GET['p'] > 0){
 	?>
@@ -39,15 +40,17 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 		<div class="hr" style="margin-top: -10px;"></div>
 		<!--columns-->
 		<div id="columns">
-			<div class="column" data-col="1">
+			<div class="column" data-col="0">
+				<i class="icon-plus icon-green fr column-add-top"></i>
 				<div class="column-header">
-					<div class="anchor-title">Anchors</div>
+					<div class="anchor-title">Stage</div>
 				</div>
 				<div class="column-content"></div>
 				<div class="column-footer">
 					<div class="card-add center"><button class="card-add-btn btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Card</button></div>
 				</div>
 			</div>
+			<!--
 			<div id="column-ctrl" class="column">
 				<div class="center">
 					<br />
@@ -55,10 +58,11 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 					<button class="btn btn-success btn-small column-add"><i class="icon-plus icon-white"></i> Column</button>
 				</div>
 			</div>
+			-->
 		</div>
 		<!--/columns-->
 	</div>
-	<?php }else{echo '<script>window.location.href="/plotlets/?plots";</script>';} ?>
+	<?php }else{echo '<script>window.location.href="'.$root.'?plots";</script>';} ?>
 	<?php } //default view ?>
 <?php }elseif(!empty($_POST['email']) && !empty($_POST['password'])){
 	$email = $_POST['email'];
@@ -70,10 +74,10 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
     	$_SESSION['userid'] = $checklogin->fetchColumn();
         $_SESSION['email'] = $email;   
         $_SESSION['loggedin'] = 1;  
-        echo '<script>window.location.href="/plotlets/?plots";</script>';
+        echo '<script>window.location.href="'.$root.'?plots";</script>';
     }else{  
         echo "<h1>Error</h1>";  
-        echo "<p>Sorry, your account could not be found. Please <a href="/plotlets/">click here to try again</a>.</p>";  
+        echo '<p>Sorry, your account could not be found. Please <a href="<?= $root ?>">click here to try again</a>.</p>';  
     }  
 }elseif(isset($_GET['login'])){ ?>
 <script>

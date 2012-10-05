@@ -46,6 +46,7 @@ $(function(){
 		$('#wrap').css('width',newwrap+'px');
 		console.log('wrapwidth: '+$('#wrap').css('width'));
 	});
+/* COLUMN DELETE */
 	$(document).on('click','.column-delete',function(){
 		var me = $(this);
 		console.log('column-delete');
@@ -71,17 +72,24 @@ $(function(){
 /* CARD FN */
 	// card load
 	//$('#msg').load('ajax.php?fn=card-load&plot=1');
+	// plot id from container
 	var plotid = $('.plot').attr('data-plot');
 	if(plotid > 0){
+		// set page title => plot title
 		$('#page-title').load('ajax.php?fn=plot-title-load&plot='+plotid);
+		// get cards from db
 		$.getJSON('ajax.php?fn=card-load&plot='+plotid,function(result){
+			// each card
 			$.each(result, function(){
-				var colcnt = $('#columns > .column').length - 1;
-				console.log('colcnt: '+colcnt);
+				var me = this;
+				var colcnt = $('#columns > .column').length-1; // count columns
+				console.log('colcnt1: '+colcnt); // while there are still columns
 				while(this.col > colcnt){
 					//create column
 					console.log('column-add');
-					$('#column-ctrl').before($('#_column').html());
+					// instantiate template
+					$('#columns').append($('#_column').html());
+					// make column's cards sortable (drag and drop)
 					$( ".column-content" ).sortable({
 						connectWith: ".column-content",
 						update: function(event, ui) {
@@ -91,47 +99,48 @@ $(function(){
 				        	console.log("New position: " + mycol +','+myrow);
 				        	var cardid = ui.item.attr('data-id');
 				        	$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
-				   		},
-				   		delay: 300
+				   		},delay: 300
 					});
-					var wrapwidth = $('#wrap').css('width').replace(/px/, "");
-					var columnwidth = $('.column:last').css('width').replace(/px/, "");
-					console.log('colwidth: '+columnwidth);
-					var newwrap = parseInt(wrapwidth) + parseInt(columnwidth);
-					$('#wrap').css('width',newwrap+'px');
-					console.log('wrapwidth: '+$('#wrap').css('width'));
-					var truecolnum = colcnt+1;
-					$('#column-ctrl').prev().attr('data-col',truecolnum);
-					$('#column-ctrl').prev().children('.column-num').html(colcnt);
-					$('#column-ctrl').prev().children('.column-header').children('.column-title').append($('#_titlecard').html());
-					//$('#column-ctrl').prev().children().find('.column-title').attr('id','columns-title-'+plotid+'-'+truecolnum);
-					//$('#column-ctrl').prev().children().find('.column-title').load('ajax.php?fn=title-load&plot='+plotid+'&col='+truecolnum);
-					if(colcnt+1 > 1){
-						$('.column-delete').show();
-					}
-
-					colcnt = $('#columns > .column').length - 1;
-					if(this.col == colcnt){
-						break;
-					}
+					// outer wrapper width
+						var wrapwidth = $('#wrap').css('width').replace(/px/, "");
+					// column width
+						var columnwidth = $('.column:last').css('width').replace(/px/, "");
+						console.log('colwidth: '+columnwidth);
+					// new outer wrapper width including new column
+						var newwrap = parseInt(wrapwidth) + parseInt(columnwidth);
+						$('#wrap').css('width',newwrap+'px');
+						console.log('wrapwidth: '+$('#wrap').css('width'));
+					// compensate for array starting with 0	
+						var truecolnum = colcnt+1;
+					// tell new column who it is	
+						$('#columns > .column:last').attr('data-col',truecolnum);
+					// add the title block to new column
+						$('#columns > .column:last').children('.column-header').children('.column-title').append($('#_titlecard').html());
+					// count columns again to verify new column added
+						colcnt = $('#columns > .column').length-1;
+					// continue to add empty columns in case there are later ones	
+						if(this.col == colcnt){
+							break;
+						}
 				}
 				// column with the corrrect data-col id add cards
-				var datacol = '.column[data-col='+this.col+']';
-
-				if(this.row == 0){
-					$(datacol).children('.column-header').children('.column-title').children('.title-card').children('.card-content-view').children('.title-content').html(this.content);
-					$(datacol).children('.column-header').children('.column-title').children('.title-card').attr('data-id',this.id);
+					var datacol = '.column[data-col='+me.col+']';
+				// 0 = title or regular cards
+				console.log(me.content);
+				if(me.row == 0){
+					$(datacol).children('.column-header').children('.column-title').children('.title-card').children('.card-content-view').children('.title-content').html(me.content);
+					$(datacol).children('.column-header').children('.column-title').children('.title-card').attr('data-id',me.id);
 				}else{
 					$(datacol).children('.column-title').append($('#_titlecard').html());
 					$(datacol).children('.column-content').append($('#_card').html());
 					var thiscard = $(datacol).children('.column-content').children('.card:last');
 					var thistitle = $(datacol).children('.column-title').children('.title-card');
-					thiscard.attr('data-id',this.id);
-					thiscard.find('.card-content').html(this.content);
-					thiscard.attr('data-color-value',this.color);
-					thiscard.attr('data-color-id',this.color_id);
-					thiscard.children('.card-content-view').css('background-color','#'+this.color);
-					thiscard.children('.card-content-edit').css('background-color','#'+this.color);
+					thiscard.attr('data-id',me.id);
+					thiscard.find('.card-content').html(me.content);
+					thiscard.attr('data-color-value',me.color);
+					thiscard.attr('data-color-id',me.color_id);
+					thiscard.children('.card-content-view').css('background-color','#'+me.color);
+					thiscard.children('.card-content-edit').css('background-color','#'+me.color);
 				}
 			}); // each
 		}); // getJSON
