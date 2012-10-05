@@ -1,4 +1,9 @@
-@import url("http://fonts.googleapis.com/css?family=Rokkitt&v1");
+@font-face {
+		  font-family: 'Rokkitt';
+		  font-style: normal;
+		  font-weight: 400;
+		  src: local('Rokkitt'), url('type/rokkitt.woff') format('woff');
+		}
 
 .smoke-base { 
 	background: none; 

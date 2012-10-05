@@ -23,13 +23,19 @@
 		.column {font-family: helvetica, arial, sans-serif; width: 200px; float: left; min-height: 600px; border-right: 1px solid #e0e0e0;}
 		.column:last-child{border-right: 0px;}
 		.column-content{min-height: 50px;}
-		.column-ctrl{margin: 10px; min-height: 35px;}
+		.column-ctrl{margin-top: 0px; width: 200px; height: 20px;}
+		.column-ctrl select{font-size: 11px; width: 50px; height: 20px; margin-left: 0px; margin-top: 5px;}
+		.column-ctrl-text{margin-left: 10px; margin-right: 5px; font-weight: bold;}
+		.column-delete-top{margin: -25px 20px 0px 0px; width: 16px; height: 16px;}
+		.column-add-top{margin: -25px 0px 0px 0px; width: 16px; height: 16px;}
+		.column-num{margin-top: -25px; font-weight: bold; margin-left: 15px; font-size: 14px;}
 		.column-title{margin-left: 10px; font-size: 12px; min-height: 35px; font-weight: 600;}
-		.anchor-title{margin-left: 10px; line-height: 1em; font-size: 12px; min-height: 35px; font-weight: 600;}
+		.anchor-title{margin-left: 10px; margin-top: 5px; line-height: 1em; font-size: 12px; min-height: 30px; font-weight: 600;}
 		
 		/* cards */
 		.card{margin: 0px 10px 10px 10px;}
 		.title-card .card-content-view{margin: 0px 10px -10px 0px !important;}
+		.title-card .card-content-edit textarea{width: 170px; margin-left: -5px; height: 38px;}
 		.rounded{-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; border: 1px solid #d8d8d8;}
 		.card-content-view {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; min-height: 35px;}
 		.card-content-view {width: 170px; margin: 10px 10px 10px 0px; padding: 5px; min-height: 35px;}
@@ -54,6 +60,7 @@
 
 		/* plot list */
 		.plot-list-title{margin-top: 4px; font-size: 18px; color: #000;}
+		.plot-list-title-edit{margin-left: 10px;}
 		.plot-ctrl{margin-right: 30px;}
 		.plot-block{margin-left: 0px;}
 		.plot-desc{width: 500px;}

@@ -12,14 +12,14 @@ $plotid = 1;
 	<meta charset="utf-8">
 <!--jquery/ui-->
 	<link rel="stylesheet" type="text/css" href="css/cupertino/jquery-ui-1.8.21.custom.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" /></script>	
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" ></script>
+	<script src="js/jquery-1.7.2.min.js" /></script>	
+	<script src="js/jquery-ui.min.js" ></script>
 <!--bootstrap-->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<script src="js/bootstrap.min.js"></script>
 <!--stripe-->
-<script type="text/javascript" src="https://js.stripe.com/v1/"></script>
+<script type="text/javascript" src="js/stripe-v1.js"></script>
 <!--smoke signal/alert/confirm-->
 	<link rel="stylesheet" href="js/smoke/smoke.css">
 	<link rel="stylesheet" href="js/smoke/themes/100s.css">
@@ -30,15 +30,19 @@ $plotid = 1;
 <body>
 	<div id="wrap">
 		<div id="header">
-			<?php if(!empty($_SESSION['loggedin'])){ ?>
-				<h1 id="app-title" class="app-title fl">plotlets:</h1>
-				<div id="page-title" class="fl"></div>
-				<div class="cf"></div>
-				<div id="nav" class="fl right">
+			<h1 id="app-title" class="app-title fl">plotlets:</h1>
+			<div id="page-title" class="fl"></div>
+			<div class="cf"></div>
+			
+			<div id="nav" class="fl right">
+				<?php if(!empty($_SESSION['loggedin'])){ ?>
 					<a href="?plots">plots</a>
 					<a href="?logout">logout</a>
-				</div>
-				<div class="cf"></div><br />
-			<?php } ?>
+				<?php }else{ ?>
+					<a href="?signup">sign-up</a>
+					<a href="?login">login</a>
+				<?php } ?>
+			</div>
+			<div class="cf"></div><br />
 		</div>
 		<div id="msg"></div>

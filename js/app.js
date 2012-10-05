@@ -61,6 +61,13 @@ $(function(){
 		
 	});
 
+/* COLUMN MOVE SELECT */
+	$(document).on('change','.column-move-select',function(){
+		$(this).parent().parent().parent().html('MOVED!');
+		// do all that funky logic here, for moving the column and db col ids
+		window.location.reload();
+	});
+
 /* CARD FN */
 	// card load
 	//$('#msg').load('ajax.php?fn=card-load&plot=1');
@@ -95,6 +102,7 @@ $(function(){
 					console.log('wrapwidth: '+$('#wrap').css('width'));
 					var truecolnum = colcnt+1;
 					$('#column-ctrl').prev().attr('data-col',truecolnum);
+					$('#column-ctrl').prev().children('.column-num').html(colcnt);
 					$('#column-ctrl').prev().children('.column-header').children('.column-title').append($('#_titlecard').html());
 					//$('#column-ctrl').prev().children().find('.column-title').attr('id','columns-title-'+plotid+'-'+truecolnum);
 					//$('#column-ctrl').prev().children().find('.column-title').load('ajax.php?fn=title-load&plot='+plotid+'&col='+truecolnum);
@@ -172,6 +180,7 @@ $(function(){
 			titlecontent = html2md(titlecontent);
 		}
 		$(this).parent().hide();
+		$(this).parent().parent().parent().parent().children('.column-ctrl').show();
 		$(this).parent().siblings('.card-content-edit').show();
 		$(this).parent().siblings('.card-content-edit').children('textarea').html(titlecontent);
 		$.getJSON('ajax.php?fn=card-edit&id=1',function(result){
@@ -197,6 +206,7 @@ $(function(){
 		$.get('ajax.php?fn=title-save&plot='+plotid+'&col='+mycol+'&content='+escape(cardcontent));
 		console.log('card-close-after-save');
 		$(this).parent().hide();
+		$(this).parent().parent().parent().parent().children('.column-ctrl').hide();
 		$(this).parent().siblings('.card-content-view').show();
 		//$(this).parent().siblings('.card-content-view').css('background-color','#'+$(this).closest('.title-card').attr('data-color-value'));
 	});
@@ -230,6 +240,7 @@ $(function(){
 	$(document).on('click','.title-close',function(){
 		console.log('title-close');
 		$(this).parent().hide();
+		$(this).parent().parent().parent().parent().children('.column-ctrl').hide();
 		$(this).siblings('textarea').val($(this).parent().siblings('.card-content-view').children('.title-content').html());
 		$(this).parent().siblings('.card-content-view').show();
 	});

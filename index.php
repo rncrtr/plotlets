@@ -9,15 +9,15 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 			$('#page-title').html('plots');
 			// plot load
 			var userid = <?= $userid ?>;
-				$.getJSON('ajax.php?fn=plot-load&user='+userid,function(result){
-					$.each(result, function(){
-						console.log(this.title);
-						$('#plots').append($('#_plot').html());
-						var thisplot = $('#plots .plot:last-child');
-						thisplot.children('.plot-ctrl').children('button').attr('data-plot-id',this.id);
-						thisplot.children('.plot-list-title').html(this.title);
-					});
+			$.getJSON('ajax.php?fn=plot-load&user='+userid,function(result){
+				$.each(result, function(){
+					console.log(this.title);
+					$('#plots').append($('#_plot').html());
+					var thisplot = $('#plots .plot:last-child');
+					thisplot.children('.plot-ctrl').children('button').attr('data-plot-id',this.id);
+					thisplot.children('.plot-list-title-view').children('.plot-list-title').html(this.title);
 				});
+			});
 		</script>
 		<label>Add New Plot:</label>
 		<div id="plot-add" class="form-inline">
@@ -31,10 +31,12 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 		session_unset();
 		session_destroy();
 		$_SESSION = array();
-		echo 'You have been logged out. <a href="/plotlets/">Login</a> again?';
-	}else{ ?>
+		echo 'You have been logged out. <a href="/plotlets/">login</a> again?';
+	}else{
+		if(isset($_GET['p']) && $_GET['p'] > 0){
+	?>
 	<div id="content" class="content plot" data-plot="<?=$_GET['p'] ?>">
-		<div class="hr" style="margin-top: -10px;"></div><br />
+		<div class="hr" style="margin-top: -10px;"></div>
 		<!--columns-->
 		<div id="columns">
 			<div class="column" data-col="1">
@@ -48,6 +50,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 			</div>
 			<div id="column-ctrl" class="column">
 				<div class="center">
+					<br />
 					<button class="btn btn-danger btn-small column-delete" style="display: none;"><i class="icon-minus icon-white"></i> Column</button>
 					<button class="btn btn-success btn-small column-add"><i class="icon-plus icon-white"></i> Column</button>
 				</div>
@@ -55,6 +58,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 		</div>
 		<!--/columns-->
 	</div>
+	<?php }else{echo '<script>window.location.href="/plotlets/?plots";</script>';} ?>
 	<?php } //default view ?>
 <?php }elseif(!empty($_POST['email']) && !empty($_POST['password'])){
 	$email = $_POST['email'];
@@ -69,13 +73,14 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
         echo '<script>window.location.href="/plotlets/?plots";</script>';
     }else{  
         echo "<h1>Error</h1>";  
-        echo "<p>Sorry, your account could not be found. Please <a href=\"index.php\">click here to try again</a>.</p>";  
+        echo "<p>Sorry, your account could not be found. Please <a href="/plotlets/">click here to try again</a>.</p>";  
     }  
-}else{ ?>
+}elseif(isset($_GET['login'])){ ?>
+<script>
+	$('#page-title').html('login');
+</script>			
 <div class="para">
 	<div class="llax" style="width: 500px;">
-		<h2 class="center">Login</h2>
-		<br />
 		<form class="form-horizontal" action="/plotlets/" method="POST">
 		  <div class="control-group">
 		    <label class="control-label" for="inputEmail">Email</label>
@@ -102,6 +107,9 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 		</form>
 	</div>
 </div>
+<?php }else{ ?>
+Homepage
+
 <?php } ?>
 
 <?php include('footer.php'); ?>	
