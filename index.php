@@ -43,7 +43,7 @@ if(!empty($_SESSION['loggedin']) && !empty($_SESSION['email'])){ ?>
 			<div class="column" data-col="0">
 				<i class="icon-plus icon-green fr column-add-top"></i>
 				<div class="column-header">
-					<div class="anchor-title">Stage</div>
+					<div class="anchor-title">Staging</div>
 				</div>
 				<div class="column-content"></div>
 				<div class="column-footer">

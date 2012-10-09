@@ -113,6 +113,7 @@ if($_GET){
 		$id = $_GET['id'];
 		$sql = "UPDATE cards SET row=$row,col=$col WHERE id=$id";
 		$dbh->query($sql);
+		echo 'card '.$id.' has been updated';
 	}
 }
 
