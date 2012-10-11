@@ -33,7 +33,6 @@ $plotid = 1;
 			<h1 id="app-title" class="app-title fl">plotlets:</h1>
 			<div id="page-title" class="fl"></div>
 			<div class="cf"></div>
-			
 			<div id="nav" class="fl right">
 				<?php if(!empty($_SESSION['loggedin'])){ ?>
 					<a href="?plots">plots</a>
