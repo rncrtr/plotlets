@@ -1,5 +1,5 @@
 $(function(){
-
+	var plotid = $('.plot').attr('data-plot');
 	$( ".card-content-view" )
 		.find( ".card-content" );
 	$( ".column" ).disableSelection();
@@ -29,15 +29,28 @@ $(function(){
 	$(document).on('click','.column-add-top',function(){
 		var me = $(this);
 		console.log('column-add');
-		$('#wrap').css('width',$('#wrap').css('width')+$('#column-ctrl').css('width'));
-		//console.log('wrapwidth: '+$('#wrap').css('width'));
+	// add the width of a new column to the wrapper
+		$('#wrap').css('width',$('#wrap').css('width')+$('.column:last').css('width'));
+	// load the column template
 		me.closest('.column').after($('#_column').html());
 		$( ".column-content" ).sortable({connectWith: ".column-content"});
+	// get the new column id
 		var newcolnum = parseInt(me.closest('.column').attr('data-col')) + 1;
-		//me.closest('.column').next().attr('data-col',newcolnum);
-		me.closest('.column').next('.column').children().find('.column-title').append($('#_titlecard').html());
-		me.closest('.column').next('.column').children().find('.title-card').attr();
+		console.log('newcol: '+newcolnum);
+	// set the column's data-col to the new id
+		me.closest('.column').next().attr('data-col',newcolnum);
+	// load in the title card
+	var newcol = $('#columns > .column[data-col='+newcolnum+']');
+		newcol.children().find('.column-title').append($('#_titlecard').html());
+		//me.closest('.column').next('.column').children().find('.title-card').attr('');
 		//$(this).parent().parent().prev().attr('id','columns-title-'+colcnt);
+		console.log('title-save');
+		var cardcontent = me.closest('.column').next('.column').children().find('.title-content').html();
+		var mycol = newcolnum; // $('#columns > .column:last').attr('data-col');
+		$('#msg').load('ajax.php?fn=title-save&plot='+plotid+'&col='+mycol+'&content='+escape(cardcontent),function(result){
+			console.log('result: '+result['id']);
+			newcol.children().find('.title-card').attr('data-id',result.id);
+		});
 		var cnt = 0;
 		$('#columns .column').each(function(){
 			$(this).attr('data-col',cnt);
@@ -59,12 +72,11 @@ $(function(){
 		$('#wrap').css('width',newwrap+'px');
 		console.log('wrapwidth: '+$('#wrap').css('width'));
 		// save title card
-		console.log('title-save');
-		var cardcontent = me.closest('.column').next('.column').children().find('.title-content').html();
-		var mycol = newcolnum; // $('#columns > .column:last').attr('data-col');
-		$.get('ajax.php?fn=title-save&plot='+plotid+'&col='+mycol+'&content='+escape(cardcontent));
+		
 		resetColumns();
+		console.log('columns reset');
 		resetCards();
+		console.log('cards reset');
 	});
 
 /* COLUMN DELETE */
@@ -165,15 +177,16 @@ $(function(){
 	$(document).on('click','.title-save',function(){
 		var me = $(this);
 		console.log('title-save');
-		var cardid = $(this).closest('.title-card').attr('data-title-id');
 		var cardcontent = me.siblings('textarea').val();
 		if(cardcontent!=null){
 			cardcontent = md2html(cardcontent);
 		}
 		var mycol = me.closest('.column').attr('data-col');
 		//var cardcolor = $(this).closest('.card').attr('data-color-id');
-		$(this).parent().siblings('.card-content-view').children('.title-content').html(cardcontent);
-		$.get('ajax.php?fn=title-save&plot='+plotid+'&col='+mycol+'&content='+escape(cardcontent));
+		$(this).closest('.column').children().find('.title-content').html(cardcontent);
+		var cardid = $(this).closest('.column').children().find('.title-card').attr('data-id');
+		console.log('content: '+cardcontent);
+		$('#msg').load('ajax.php?fn=title-save&plot='+plotid+'&col='+mycol+'&id='+cardid+'&content='+escape(cardcontent));
 		console.log('card-close-after-save');
 		$(this).parent().hide();
 		$(this).parent().parent().parent().parent().children('.column-ctrl').hide();
@@ -192,133 +205,39 @@ $(function(){
 
 /* CARD FN */
 	// card load
-	//$('#msg').load('ajax.php?fn=card-load&plot=1');
-	// plot id from container
-	var plotid = $('.plot').attr('data-plot');
 	var lastcol = 0;
 	if(plotid > 0){
-		// set page title => plot title
 		$('#page-title').load('ajax.php?fn=plot-title-load&plot='+plotid);
-		// get cards from db
-
-		$.getJSON('ajax.php?fn=card-load&plot='+plotid,function(result){
-			// each card
-			console.log('reslen: '+result.length);
-				var i = 0;
-				var titlecontent = '';
-				var nextcol = 1;
-				var thiscol = 0;
-				while(i < result.length){
-					console.log('res: '+result[i].col);
-						while(nextcol <= result[i].col){
-						//create column
-							console.log('column-add '+nextcol);
-						// instantiate template
-							$('#columns').append($('#_column').html());
-						// outer wrapper width
-							var wrapwidth = $('#wrap').css('width').replace(/px/, "");
-						// column width
-							var columnwidth = $('.column:last').css('width').replace(/px/, "");
-						// new outer wrapper width including new column
-							var newwrap = parseInt(wrapwidth) + parseInt(columnwidth);
-							$('#wrap').css('width',newwrap+'px');
-							if(result[i].row == 0){
-								titlecontent = result[i].content;
-							}else{
-								titlecontent = 'column title';
-							}
-							$('#columns > .column:last').children('.column-header').children('.column-title').append($('#_titlecard').html());
-							$('#columns > .column:last').children().find('.title-card').attr('data-id',result[i].id);
-							$('#columns > .column:last').children().find('.title-content').html(titlecontent);
-							$('#columns > .column:last').attr('data-col',nextcol);
-							nextcol++;
-						} // while new col
-					var datacol = '.column[data-col='+result[i].col+']';
-					if(result[i].row != 0){
-						$(datacol).children('.column-content').append($('#_card').html());
-						var thiscard = $(datacol).children('.column-content').children('.card:last');
-						var thistitle = $(datacol).children('.column-title').children('.title-card');
-						thiscard.attr('data-id',result[i].id);
-						thiscard.find('.card-content').html(result[i].content);
-						thiscard.attr('data-color-value',result[i].color);
-						thiscard.attr('data-row',result[i].row);
-						thiscard.attr('data-color-id',result[i].color_id);
-						thiscard.children('.card-content-view').css('background-color','#'+result[i].color);
-						thiscard.children('.card-content-edit').css('background-color','#'+result[i].color);
-					}
-					i++;
-				} //while
-				// make column's cards sortable (drag and drop)
-				$( ".column-content" ).sortable({
-					connectWith: ".column-content",
-					update: function(event, ui){
-			        	var myrow = ui.item.index()+1;
-			        	var mycol = ui.item.closest('.column').attr('data-col');
-			        	var cardid = ui.item.attr('data-id');
-			        	var cards = $('.column[data-col='+mycol+']').children().find('.card');
-			      		var cardcnt = 1;
-			        	$('.column[data-col='+mycol+']').children().find('.card').each(function(){
-			        		console.log(this);
-			        		myrow = cardcnt;
-			        		cardid = $(this).attr('data-id');
-			        			$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
-			        		cardcnt++;
-			        	});
-			        	
-			   		},delay: 300
-				});	
-				// compensate for array starting with 0	
-						//var truecolnum = colcnt+1;
-				// tell new column who it is	
-						
-				// add the title block to new column
-						//
-						/*
-						var mycol = truecolnum;
-						var cardcontent = $('#columns > .column:last').children('.column-header').children('.column-title').find('.title-content').html(); 
-						$.get('ajax.php?fn=title-save&plot='+plotid+'&col='+mycol+'&content='+escape(cardcontent));
-						testfortitle = 0;
-						*/
-
-				// count columns again to verify new column added
-					//colcnt = $('#columns > .column').length-1;
-				// continue to add empty columns in case there are later ones	
-				
-			// column with the corrrect data-col id add cards
-			/*
-				var datacol = '.column[data-col='+result.col+']';
-
-				if(result.row == 0){
-					$(datacol).children('.column-header').children('.column-title').children('.title-card').children('.card-content-view').children('.title-content').html(result.content);
-					$(datacol).children('.column-header').children('.column-title').children('.title-card').attr('data-id',result.id);
-				}else{
-					$(datacol).children('.column-title').append($('#_titlecard').html());
-					$(datacol).children('.column-content').append($('#_card').html());
-					var thiscard = $(datacol).children('.column-content').children('.card:last');
-					var thistitle = $(datacol).children('.column-title').children('.title-card');
-					thiscard.attr('data-id',result.id);
-					thiscard.find('.card-content').html(result.content);
-					thiscard.attr('data-color-value',result.color);
-					thiscard.attr('data-row',result.row);
-					thiscard.attr('data-color-id',result.color_id);
-					thiscard.children('.card-content-view').css('background-color','#'+result.color);
-					thiscard.children('.card-content-edit').css('background-color','#'+result.color);
+		$.getJSON('ajax.php?fn=card-load&plot='+plotid,function(cards){
+			$.each(cards,function(index,card){
+				//console.log(card);
+				// create column
+				if(card.col > 0 && lastcol != card.col){
+					$('#columns').append($('#_column').html());
+					$('#columns > .column:last').attr('data-col',card.col);
 				}
-			//}
-		// make column's cards sortable (drag and drop)
-			$( ".column-content" ).sortable({
-				connectWith: ".column-content",
-				update: function(event, ui) {
-		        	console.log('card id: '+ui.item.attr('data-id'));
-		        	var myrow = ui.item.index()+1;
-		        	var mycol = ui.item.closest('.column').attr('data-col');
-		        	console.log("New position: " + mycol +','+myrow);
-		        	var cardid = ui.item.attr('data-id');
-		        	$('#msg').load('ajax.php?fn=card-sort-save&id='+cardid+'&row='+myrow+'&col='+mycol);
-		   		},delay: 300
-			});		
-*/
-		}); // getJSON
+				addColToWrap();
+				//console.log('c: '+card.col+'| r: '+card.row+'| content: '+card.content);
+				var thiscol = $('#columns > .column[data-col='+card.col+']');
+				if(card.row=="0"){
+					//console.log('title-card '+card.id);
+					thiscol.children().find('.column-title').append($('#_titlecard').html());
+					thiscol.children().find('.title-card').attr('data-id',card.id);
+					thiscol.children().find('.title-content').html(card.content);
+				}else{
+					//console.log('card '+card.id);
+					$('#columns > .column[data-col='+card.col+']').children('.column-content').append($('#_card').html());
+					thiscol.children().find('.card:last').attr('data-id',card.id);
+					thiscol.children().find('.card-content:last').html(card.content);
+					thiscol.children().find('.card:last').attr('data-color-value',card.color);
+					thiscol.children().find('.card:last').attr('data-row',card.row);
+					thiscol.children().find('.card:last').attr('data-color-id',card.color_id);
+					thiscol.children().find('.card:last').children('.card-content-view').css('background-color','#'+card.color);
+					thiscol.children().find('.card:last').children('.card-content-edit').css('background-color','#'+card.color);
+				}
+				lastcol = card.col;
+			});
+		});
 	}
 
 	// card add
@@ -395,8 +314,6 @@ $(function(){
 		
 	});
 
-
-
 	// color click
 	$(document).on('click','.colorclick',function(){
 		var me = $(this);
@@ -420,6 +337,13 @@ $(function(){
 		content = content.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
 		content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
 		return content;
+	}
+
+	function addColToWrap(){
+		var wrapwidth = $('#wrap').css('width').replace(/px/, "");
+		var columnwidth = $('.column:last').css('width').replace(/px/, "");
+		var newwrap = parseInt(wrapwidth) + parseInt(columnwidth);
+		$('#wrap').css('width',newwrap+'px');
 	}
 
 	function resetColumns(){

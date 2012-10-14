@@ -42,21 +42,16 @@ if($_GET){
 		$plotid = $_GET['plot'];
 		$col = $_GET['col'];
 		$content = $_GET['content'];
-		$sql = "SELECT content FROM cards WHERE plot_id=$plotid and col=$col and row=0";
-		$qry = $dbh->prepare($sql);
-		$qry->execute();
-		$rowcnt = $qry->rowCount();
-		echo $rowcnt;
-		if(isset($rowcnt) && $rowcnt > 0){
-			$sql2 = "UPDATE cards SET content='$content' WHERE plot_id=$plotid and col=$col and row=0";
-			$title = $dbh->query($sql2);
-			echo $sql2;
-			echo $content;
+		if(isset($_GET['id']) && $_GET['id']!=''){
+			$id = $_GET['id'];
+			$sql2 = "UPDATE cards SET content='$content' WHERE id=$id";
+			$dbh->query($sql2);
+			echo 'title updated';
 		}else{
 			$sql3 = "INSERT INTO cards (plot_id,content,col,row) VALUES ($plotid,'$content',$col,0);";
 			$title = $dbh->query($sql3);
-			echo $sql3;
-			echo $content;
+			$card = $dbh->query("SELECT LAST_INSERT_ID() as id")->fetch();
+			echo json_encode($card);
 		}
 	}
 	if($_GET['fn']=='plot-title-load'){
@@ -113,7 +108,7 @@ if($_GET){
 		$id = $_GET['id'];
 		$sql = "UPDATE cards SET row=$row,col=$col WHERE id=$id";
 		$dbh->query($sql);
-		echo 'card '.$id.' has been updated';
+		//echo 'card '.$id.' has been updated';
 	}
 }
 
